@@ -4,7 +4,6 @@ metadata:
   name: {{ include "test-app.fullname" . }}
   labels:
     {{- include "test-app.labels" . | nindent 4 }}
-  namespace: {{ .Values.namespace }}    
 spec:
   type: {{ .Values.service.type }}
   ports:
