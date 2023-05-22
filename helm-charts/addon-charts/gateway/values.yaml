@@ -1,0 +1,10 @@
+ingressGateway:
+- name: msa-gateway
+  selector: gateway
+  servers:
+  - port:
+      number: 80
+      name: http
+      protocol: HTTP
+    hosts:
+    - "*"
