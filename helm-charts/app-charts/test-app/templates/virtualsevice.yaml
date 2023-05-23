@@ -1,0 +1,20 @@
+apiVersion: networking.istio.io/v1beta1
+kind: VirtualService
+metadata:
+    name: {{ include "test-app.fullname" . }}
+    labels:
+        {{- include "test-app.labels" . | nindent 4 }}
+spec:
+    hosts:
+    - test-app.com
+    gateways:
+    - msa-gateway
+    http:
+    - name: primary
+    route:
+    - destination:
+        host: {{ include "test-app.fullname" . }}
+        subset: stable
+        port:
+            number: {{ .Values.service.port }}
+        weight: 100
