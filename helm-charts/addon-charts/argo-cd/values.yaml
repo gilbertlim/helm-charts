@@ -1553,7 +1553,7 @@ server:
   #     - /lemonldap-ng-controller
   #     - --alsologtostderr
   #     - --configmap=$(POD_NAMESPACE)/lemonldap-ng-configuration
-  #   env:C
+  #   env:
   #     - name: POD_NAME
   #       valueFrom:
   #         fieldRef:

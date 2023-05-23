@@ -41,6 +41,20 @@ helm repo add redis-ha https://dandydeveloper.github.io/charts
 helm dependency build
 ```
 
+values.yaml 수정
+```yaml
+server:
+  #...
+  service:
+    #...    
+    # -- Server service type
+    type: LoadBalancer # ClusterIP
+    # -- Server service http port
+    servicePortHttp: 8880 #80
+    # -- Server service https port
+    servicePortHttps: 8443 #443
+```
+
 설치
 ```sh
 # install
@@ -138,6 +152,15 @@ tar -zxvf *.tgz
 rm *.tgz
 ```
 
+values.yaml 수정
+```yaml
+service:
+  #...
+  servicePort: 60001 #80
+  sessionAffinity: None
+  type: LoadBalancer #ClusterIP
+```
+
 접속
 - http://localhost:60001
 
@@ -149,6 +172,7 @@ rm *.tgz
 
 charts
 - addon-charts/kiali-operator
+- addon-charts/kiali-server
 
 chart 생성 방법
 ```sh
@@ -161,6 +185,36 @@ tar -zxvf *.tgz
 rm *.tgz
 ```
 
+values.yaml 수정
+```yaml
+auth:
+  openid: {}
+  openshift: {}
+  strategy: "anonymous" #""
+
+deployment:
+  service_type: "LoadBalancer" #""
+
+external_services:
+  custom_dashboards:
+    enabled: true
+  istio:
+    root_namespace: ""
+  prometheus:
+    custom_metrics_url: http://prometheus-server.monitoring.svc.cluster.local:60001/
+    url: http://prometheus-server.monitoring.svc.cluster.local:60001/
+    component_status:
+      app_label: "prometheus"
+      is_core: true
+      namespace: "monitoring"
+
+server:
+  port: 20001
+  metrics_enabled: true
+  metrics_port: 9090
+  web_root: ""      
+```
+
 접속
 - http://localhost:20001
 
@@ -171,7 +225,7 @@ rm *.tgz
 > namespace: monitoring
 
 charts
-- addon-charts/kiali-operator
+- addon-charts/grafana
 
 chart 생성 방법
 ```sh
@@ -182,7 +236,22 @@ tar -zxvf *.tgz
 rm *.tgz
 ```
 
+values.yaml 수정
+```yaml
+service:
+  enabled: true
+  type: LoadBalancer #ClusterIP
+  port: 50001 #80
+  targetPort: 3000
+
+#...  
+
+# Administrator credentials when not using an existing secret (see below)
+adminUser: admin
+adminPassword: admin #strongpassword
+```
+
 접속
-- id : `kubectl get secret -n monitoring grafana -o jsonpath='{.data.admin-user}' | base64 -d`
-- password : `kubectl get secret -n monitoring grafana -o jsonpath='{.data.admin-password}' | base64 -d`
+- id : admin (`kubectl get secret -n monitoring grafana -o jsonpath='{.data.admin-user}' | base64 -d`)
+- password : admin (`kubectl get secret -n monitoring grafana -o jsonpath='{.data.admin-password}' | base64 -d`)
 - http://localhost:50001
