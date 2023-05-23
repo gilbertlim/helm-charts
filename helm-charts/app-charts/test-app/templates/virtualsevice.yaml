@@ -11,10 +11,10 @@ spec:
     - msa-gateway
     http:
         - name: primary
-        route:
-        - destination:
-            host: {{ include "test-app.fullname" . }}
-            subset: stable
-            port:
+          route:
+          - destination:
+              host: {{ include "test-app.fullname" . }}
+              subset: stable
+              port:
                 number: {{ .Values.service.port }}
-            weight: 100
+              weight: 100
