@@ -601,7 +601,7 @@ server:
 
     loadBalancerIP: ""
     loadBalancerSourceRanges: []
-    servicePort: 90001 #80
+    servicePort: 60001 #80
     sessionAffinity: None
     type: LoadBalancer #ClusterIP
 
