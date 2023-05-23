@@ -12,7 +12,7 @@ spec:
     http:
     - match:
       - uri:
-          prefix: /test
+          prefix: /
       route:
       - destination:
           host: {{ include "test-app.fullname" . }}
