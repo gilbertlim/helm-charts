@@ -103,7 +103,7 @@ kiali_feature_flags:
     ignore: ["KIA1201"]
 
 login_token:
-  signing_key: ""
+  signing_key: "admin"
 
 server:
   port: 20001
