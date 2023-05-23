@@ -1,6 +1,6 @@
 ingressGateway:
 - name: msa-gateway
-  selector: gateway
+  selector: ingressgateway
   servers:
   - port:
       number: 80
