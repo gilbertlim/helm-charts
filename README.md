@@ -7,7 +7,20 @@
 
 minikube 시작
 
-`minikube start --cpus 4 --memory 4g`
+`minikube start --cpus 4 --memory 6g`
+
+LoadBalancer type의 Service 접속 설정
+`sudo minikube tunnel --cleanup`
+
+- EXTERNAL-IP를 localhost로 할당하여 로컬에서 port로 구분하여 접속
+- 접속할 앱의 service type을 LoadBalancer로 변경하고, Port가 겹치지 않도록 설정
+
+|service|host|port|url|
+|---|---|---|---|
+|argocd|localhost|8443|https://localhost:8443|
+|prometheus|localhost|60001|http://localhost:60001|
+|kiali|localhost|20001|http://localhost:20001|
+|grafana|localhost|50001|http://localhost:50001|
 
 <br>
 
@@ -31,17 +44,14 @@ helm dependency build
 설치
 ```sh
 # install
-helm install argocd . --kube-context minikube
+helm install argocd . --namespace argocd --kube-context minikube
 ```
 
 접속
-```sh
-# password 확인
-kubectl -n default get secret argocd-initial-admin-secret -o jsonpath="{.data.password}" | base64 -d # id: admin, password: %이전까지의 값
+- id: `admin`
+- password: `kubectl -n default get secret argocd-initial-admin-secret -o jsonpath="{.data.password}" | base64 -d`
+- https://localhost:8443
 
-minikube service argocd-server
-# 출력되는 IP로 접속
-```
 
 <br>
 
@@ -64,9 +74,7 @@ helm search repo istio # repo 확인
 helm pull istio/base
 helm pull istio/d
 #helm pull istio/gateway
-tar -zxvf base-1.17.2.tgz
-tar -zxvf istiod-1.17.2.tgz
-#tar -zxvf gateway-1.17.2.tgz
+tar -zxvf *.tgz
 rm *.tgz
 
 # instio-ingress
@@ -102,11 +110,38 @@ charts
 설치
 - ArgoCD 앱에서 설치
 
+접속
+- Chrome extension ModHeader 사용 후 `Host: web.test-app.com` 헤더 적용
+- http://127.0.0.1
+
 
 <br>
 <br>
 
 # Add-on
+
+> 쉽게 설치하는 방법: https://github.com/istio/istio/tree/master/samples/addons
+
+## Prometheus
+
+> namespace: monitoring
+
+charts
+- addon-charts/prometheus
+
+chart 생성 방법
+```sh
+helm repo add prometheus-community https://prometheus-community.github.io/helm-charts
+helm search repo prometheus-community
+helm pull prometheus-community/prometheus
+tar -zxvf *.tgz
+rm *.tgz
+```
+
+접속
+- http://localhost:60001
+
+<br>
 
 ## Kiali
 
@@ -119,7 +154,35 @@ chart 생성 방법
 ```sh
 helm repo add kiali https://kiali.org/helm-charts
 helm repo update
+helm search repo kiali
 helm pull kiali/kiali-operator
-tar -zxvf kiali-operator-1.68.0.tgz
+helm pull kiali/kiali-server                     
+tar -zxvf *.tgz
 rm *.tgz
 ```
+
+접속
+- http://localhost:20001
+
+<br>
+
+## Grafana
+
+> namespace: monitoring
+
+charts
+- addon-charts/kiali-operator
+
+chart 생성 방법
+```sh
+helm repo add grafana https://grafana.github.io/helm-charts
+helm repo update
+helm pull grafana/grafana
+tar -zxvf *.tgz
+rm *.tgz
+```
+
+접속
+- id : `kubectl get secret -n monitoring grafana -o jsonpath='{.data.admin-user}' | base64 -d`
+- password : `kubectl get secret -n monitoring grafana -o jsonpath='{.data.admin-password}' | base64 -d`
+- http://localhost:50001
