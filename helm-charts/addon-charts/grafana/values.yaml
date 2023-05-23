@@ -551,7 +551,7 @@ datasources:
    - name: Prometheus
      type: prometheus
      url: http://prometheus-server.monitoring.svc.cluster.local:60001
-     access: proxy
+     #access: proxy
      isDefault: true
 #    - name: CloudWatch
 #      type: cloudwatch
