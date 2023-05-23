@@ -72,7 +72,7 @@ deployment:
   secret_name: "kiali"
   security_context: {}
   service_annotations: {}
-  service_type: "LoadBalancer"
+  service_type: "LoadBalancer" #""
   tolerations: []
   version_label: v1.68.0 # v1.39 # v1.39.0 # see: https://quay.io/repository/kiali/kiali?tab=tags
   view_only_mode: false
@@ -82,6 +82,13 @@ external_services:
     enabled: true
   istio:
     root_namespace: ""
+  prometheus:
+    custom_metrics_url: http://prometheus.monitoring.svc.cluster.local:90001/
+    url: http://prometheus.monitoring.svc.cluster.local:90001/
+    component_status:
+      app_label: "prometheus"
+      is_core: true
+      namespace: "monitoring"
 
 identity: {}
   #cert_file:
