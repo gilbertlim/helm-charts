@@ -72,7 +72,7 @@ deployment:
   secret_name: "kiali"
   security_context: {}
   service_annotations: {}
-  service_type: ""
+  service_type: "LoadBalancer"
   tolerations: []
   version_label: v1.68.0 # v1.39 # v1.39.0 # see: https://quay.io/repository/kiali/kiali?tab=tags
   view_only_mode: false
