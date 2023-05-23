@@ -6,7 +6,7 @@ metadata:
         {{- include "test-app.labels" . | nindent 4 }}
 spec:
     hosts:
-    - web.test-app.com
+    - "*"
     gateways:
     - msa-gateway
     http:
