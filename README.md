@@ -1,7 +1,7 @@
 # helm-charts
 
 
-# Usage
+# Basic
 
 ## 1. Minikube
 
@@ -21,7 +21,7 @@ charts
 chart 생성 방법
 ```sh
 git clone https://github.com/argoproj/argo-helm.git
-cd argo-helm/charts/argo-cd # 해당 폴더를 chart로 생성
+cp -r argo-helm/charts/argo-cd . # 해당 폴더를 chart로 생성
 
 # dependency
 helm repo add redis-ha https://dandydeveloper.github.io/charts 
@@ -63,15 +63,20 @@ helm search repo istio # repo 확인
 # 원하는 경로에 chart.zip pull
 helm pull istio/base
 helm pull istio/d
-helm pull istio/gateway
+#helm pull istio/gateway
 tar -zxvf base-1.17.2.tgz
 tar -zxvf istiod-1.17.2.tgz
-tar -zxvf gateway-1.17.2.tgz
+#tar -zxvf gateway-1.17.2.tgz
+rm *.tgz
+
+# instio-ingress
+git clone https://github.com/istio/istio.git
+cp -r istio/manifests/charts/gateways/istio-ingress .
 ```
 
 설치
 - ArgoCD 앱에서 설치
-- istio-base -> istiod -> istio-ingress
+- 순서: istio-base -> istiod -> istio-ingress
 
 <br>
 
@@ -96,3 +101,25 @@ charts
 
 설치
 - ArgoCD 앱에서 설치
+
+
+<br>
+<br>
+
+# Add-on
+
+## Kiali
+
+> namespace: istio-system
+
+charts
+- addon-charts/kiali-operator
+
+chart 생성 방법
+```sh
+helm repo add kiali https://kiali.org/helm-charts
+helm repo update
+helm pull kiali/kiali-operator
+tar -zxvf kiali-operator-1.68.0.tgz
+rm *.tgz
+```
