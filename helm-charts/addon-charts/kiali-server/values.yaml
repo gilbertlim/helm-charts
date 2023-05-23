@@ -83,8 +83,8 @@ external_services:
   istio:
     root_namespace: ""
   prometheus:
-    custom_metrics_url: http://prometheus.monitoring.svc.cluster.local:60001/
-    url: http://prometheus.monitoring.svc.cluster.local:60001/
+    custom_metrics_url: http://prometheus-server.monitoring.svc.cluster.local:60001/
+    url: http://prometheus-server.monitoring.svc.cluster.local:60001/
     component_status:
       app_label: "prometheus"
       is_core: true
