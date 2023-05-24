@@ -18,3 +18,11 @@ spec:
           host: {{ include "test-app.fullname" . }}-svc
           port:
             number: {{ .Values.service.port }}
+          subset: v1
+        weight: 90
+      - destination:
+          host: {{ include "test-app.fullname" . }}-svc
+          port:
+            number: {{ .Values.service.port }}
+          subset: v2
+        weight: 10
