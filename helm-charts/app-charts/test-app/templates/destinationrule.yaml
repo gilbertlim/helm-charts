@@ -6,6 +6,9 @@ metadata:
         {{- include "test-app.labels" . | nindent 4 }}
 spec:
     host: {{ include "test-app.fullname" . }}-svc
+    trafficPolicy:
+        loadBalancer:
+            simple: ROUND_ROBIN
     subsets:
     - name: v1
       labels:
