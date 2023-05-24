@@ -19,7 +19,7 @@ spec:
         {{- toYaml . | nindent 8 }}
       {{- end }}
       labels:
-        {{- include "test-app.selectorLabels" . | nindent 8 }}
+        {{- include "test-app.selectorLabels" . | nindent 8 }}-v2
         app: test-app        
         version: v2
     spec:
