@@ -24,7 +24,17 @@ LoadBalancer type의 Service 접속 설정
 
 <br>
 
-## 2. ArgoCD
+## 2. Namespace
+
+charts
+- init-charts/namespace
+
+설치
+- `helm install namespace . --kube-context minikube`
+
+<br>
+
+## 3. ArgoCD
 
 > namespace: default
 
@@ -66,7 +76,7 @@ server:
 
 <br>
 
-## 3. Istio
+## 4. Istio
 
 > namespace: istio-system
 
@@ -99,7 +109,7 @@ cp -r istio/manifests/charts/gateways/istio-ingress .
 
 <br>
 
-## 4. Gateway
+## 5. Gateway
 
 > namespace: msa
 
@@ -111,7 +121,7 @@ charts
 
 <br>
 
-## 5. test-app
+## 6. test-app
 
 > namespace: msa
 
@@ -252,3 +262,25 @@ adminPassword: admin #strongpassword
 - id : admin (`kubectl get secret -n monitoring grafana -o jsonpath='{.data.admin-user}' | base64 -d`)
 - password : admin (`kubectl get secret -n monitoring grafana -o jsonpath='{.data.admin-password}' | base64 -d`)
 - http://localhost:50001
+
+<br>
+
+# App of Apps
+
+ArgoCD 애플리케이션 생성을 위한 app chart
+- ArgoCD에서 app-of-apps 애플리케이션을 생성하고 배포하면 templates에 있는 대로 애플리케이션이 생성됨
+- 추후 sync를 눌러 각 애플리케이션을 배포
+
+
+charts
+- addon-charts/app-of-apps
+
+values.yaml 수정
+```yaml
+spec:
+  destination:
+    server: https://kubernetes.default.svc
+  source:
+    repoURL: https://github.com/gilbertlim/helm-charts
+    targetRevision: main
+```
