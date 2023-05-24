@@ -1,0 +1,7 @@
+spec:
+  destination:
+    server: https://kubernetes.default.svc
+  source:
+    repoURL: https://github.com/gilbertlim/helm-charts
+    targetRevision: main
+    path: helm-charts/addon-charts/app-of-apps
