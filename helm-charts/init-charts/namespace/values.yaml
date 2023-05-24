@@ -2,3 +2,4 @@ namespace:
   - msa
   - istio-system
   - monitoring
+  - argocd
