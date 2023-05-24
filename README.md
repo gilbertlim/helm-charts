@@ -56,10 +56,7 @@ server:
 ```
 
 설치
-```sh
-# install
-helm install argocd . --namespace argocd --kube-context minikube
-```
+- `helm install argocd . --namespace argocd --kube-context minikube`
 
 접속
 - id: `admin`
