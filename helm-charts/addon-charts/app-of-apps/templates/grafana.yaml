@@ -9,7 +9,7 @@ spec:
     namespace: monitoring
     server: {{ .Values.spec.destination.server }}
   project: default
-  sources:
+  source:
     path: helm-charts/addon-charts/grafana
     repoURL: {{ .Values.spec.source.repoURL }}
     targetRevision: {{ .Values.spec.source.targetRevision }}
