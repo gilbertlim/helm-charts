@@ -5,15 +5,15 @@ kind: Gateway
 metadata:
   name: {{ .name }}
 spec:
-    selector:
-        istio: {{ .selector }}
-    servers:
+    selector: # gateway 동작을 담당하게 될 proxy 설정
+        istio: {{ .selector }} # 해당 라벨을 사용하는 envoy proxy에게 ingress gateway 역할 위임
+    servers: # proxy로 접근 주소/프로토콜 설정
     {{- range .servers }}
     - port:
         number: {{ .port.number }}
         name: {{ .port.name }}
         protocol: {{ .port.protocol }}
-      hosts:
+      hosts: # proxy가 관리하는 주소 설정
       {{- range .hosts }}
       - {{ . | quote }}
       {{- end }}
