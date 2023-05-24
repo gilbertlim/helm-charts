@@ -9,13 +9,13 @@ spec:
     subsets:
     - name: v1
       labels:
-        {{- include "test-app.selectorLabels" . | nindent 8 }}
+        version: v1
       trafficPolicy:
         loadBalancer:
           simple: RANDOM
     - name: v2
       labels:
-        {{- include "test-app.selectorLabels" . | nindent 8 }}-v2
+        version: v2
       trafficPolicy:
         loadBalancer:
           simple: ROUND_ROBIN
