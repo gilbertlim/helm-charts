@@ -82,7 +82,7 @@ server:
 
 접속
 - id: `admin`
-- password: `kubectl -n default get secret argocd-initial-admin-secret -o jsonpath="{.data.password}" | base64 -d`
+- password: `kubectl -n argocd get secret argocd-initial-admin-secret -o jsonpath="{.data.password}" | base64 -d`
 - https://localhost:8443
 
 <br>
