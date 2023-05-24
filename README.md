@@ -1,7 +1,17 @@
 # helm-charts
 
+<br>
 
-# Basic
+# Preparation
+
+1. Start minikube
+2. Create namespace
+3. Install argo-cd
+4. Create app-of-apps application in argocd
+5. deploy app-of-apps
+6. sync all argocd applications
+
+<br>
 
 ## 1. Minikube
 
@@ -32,11 +42,13 @@ charts
 설치
 - `helm install namespace . --kube-context minikube`
 
+이후 argocd에 애플리케이션 등록
+
 <br>
 
 ## 3. ArgoCD
 
-> namespace: default
+> namespace: argocd
 
 charts
 - addon-charts/argo-cd
@@ -73,10 +85,55 @@ server:
 - password: `kubectl -n default get secret argocd-initial-admin-secret -o jsonpath="{.data.password}" | base64 -d`
 - https://localhost:8443
 
+<br>
+
+## 4. App of Apps
+
+ArgoCD 애플리케이션 생성을 위한 app chart
+- ArgoCD에서 app-of-apps 애플리케이션을 생성하고 배포하면 templates에 있는 대로 애플리케이션이 생성됨
+- 추후 sync를 눌러 각 애플리케이션을 배포
+
+
+charts
+- addon-charts/app-of-apps
+
+values.yaml 수정
+```yaml
+spec:
+  destination:
+    server: https://kubernetes.default.svc
+  source:
+    repoURL: https://github.com/gilbertlim/helm-charts
+    targetRevision: main
+```
 
 <br>
 
-## 4. Istio
+# App charts
+<br>
+
+## test-app
+
+> namespace: msa
+
+charts
+- app-charts/test-app
+
+설치
+- ArgoCD 앱에서 설치
+
+접속
+- Chrome extension ModHeader 사용 후 `Host: web.test-app.com` 헤더 적용
+- http://127.0.0.1
+
+<br>
+
+# Addon charts
+
+<br>
+
+## Istio
+쉽게 설치하는 방법: https://github.com/istio/istio/tree/master/samples/addons
 
 > namespace: istio-system
 
@@ -109,7 +166,7 @@ cp -r istio/manifests/charts/gateways/istio-ingress .
 
 <br>
 
-## 5. Gateway
+## Gateway
 
 > namespace: msa
 
@@ -120,28 +177,6 @@ charts
 - ArgoCD 앱에서 설치
 
 <br>
-
-## 6. test-app
-
-> namespace: msa
-
-charts
-- app-charts/test-app
-
-설치
-- ArgoCD 앱에서 설치
-
-접속
-- Chrome extension ModHeader 사용 후 `Host: web.test-app.com` 헤더 적용
-- http://127.0.0.1
-
-
-<br>
-<br>
-
-# Add-on
-
-> 쉽게 설치하는 방법: https://github.com/istio/istio/tree/master/samples/addons
 
 ## Prometheus
 
@@ -262,25 +297,3 @@ adminPassword: admin #strongpassword
 - id : admin (`kubectl get secret -n monitoring grafana -o jsonpath='{.data.admin-user}' | base64 -d`)
 - password : admin (`kubectl get secret -n monitoring grafana -o jsonpath='{.data.admin-password}' | base64 -d`)
 - http://localhost:50001
-
-<br>
-
-# App of Apps
-
-ArgoCD 애플리케이션 생성을 위한 app chart
-- ArgoCD에서 app-of-apps 애플리케이션을 생성하고 배포하면 templates에 있는 대로 애플리케이션이 생성됨
-- 추후 sync를 눌러 각 애플리케이션을 배포
-
-
-charts
-- addon-charts/app-of-apps
-
-values.yaml 수정
-```yaml
-spec:
-  destination:
-    server: https://kubernetes.default.svc
-  source:
-    repoURL: https://github.com/gilbertlim/helm-charts
-    targetRevision: main
-```
