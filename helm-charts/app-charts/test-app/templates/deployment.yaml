@@ -20,6 +20,7 @@ spec:
       {{- end }}
       labels:
         {{- include "test-app.selectorLabels" . | nindent 8 }}
+        app: test-app        
         version: v1
     spec:
       serviceAccountName: {{ include "test-app.serviceAccountName" . }}
