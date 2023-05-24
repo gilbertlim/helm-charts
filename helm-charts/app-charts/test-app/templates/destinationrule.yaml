@@ -1,0 +1,21 @@
+apiVersion: networking.istio.io/v1beta1
+kind: DestinationRule
+metadata:
+    name: {{ include "test-app.fullname" . }}-destrule
+    labels:
+        {{- include "test-app.labels" . | nindent 4 }}
+spec:
+    host: {{ include "test-app.fullname" . }}-svc
+    subsets:
+    - name: v1
+      labels:
+        {{- include "test-app.selectorLabels" . | nindent 8 }}
+      trafficPolicy:
+        loadBalancer:
+          simple: RANDOM
+    - name: v2
+      labels:
+        {{- include "test-app.selectorLabels" . | nindent 8 }}-v2
+      trafficPolicy:
+        loadBalancer:
+          simple: ROUND_ROBIN
