@@ -10,6 +10,6 @@ spec:
     server: {{ .Values.spec.destination.server }}
   project: default
   source:
-      path: helm-charts/addon-charts/istiod
-      repoURL: {{ .Values.spec.source.repoURL }}
-      targetRevision: {{ .Values.spec.source.targetRevision }}
+    path: helm-charts/addon-charts/istiod
+    repoURL: {{ .Values.spec.source.repoURL }}
+    targetRevision: {{ .Values.spec.source.targetRevision }}
