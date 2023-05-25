@@ -14,5 +14,5 @@ spec:
     repoURL: {{ .Values.spec.source.repoURL }}
     targetRevision: {{ .Values.spec.source.targetRevision }}
     helm:
-      valueFiles:
-        - values.yaml
+      valueFiles: 
+        - {{ .Values.valueFiles }}
