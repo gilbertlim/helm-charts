@@ -1,6 +1,5 @@
 {{- $serviceName := include "istio-test-app.name" . -}}
 {{- $labels := include "istio-test-app.labels" . -}}
-{{- $selectorLabels := include "istio-test-app.selectorLabels" . -}}
 apiVersion: apps/v1
 kind: Deployment
 metadata:
@@ -11,12 +10,11 @@ spec:
   replicas: {{ .Values.replicaCount }}
   selector:
     matchLabels:
-      {{ $selectorLabels }}-v1
+      version: v1
   template:
     metadata:
       labels:
         {{- $labels | nindent 8 }}
-        {{- $labels | nindent 8 }}-v1
         version: v1
     spec:
       containers:
@@ -48,12 +46,11 @@ spec:
   replicas: {{ .Values.replicaCount }}
   selector:
     matchLabels:
-      {{ $selectorLabels }}-v2
+      version: v2
   template:
     metadata:
       labels:
         {{- $labels | nindent 8 }}
-        {{- $labels | nindent 8 }}-v2
         version: v2
     spec:
       containers:
