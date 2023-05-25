@@ -1,9 +1,12 @@
+{{- $serviceName := include "istio-test-app.name" . -}}
+{{- $labels := include "istio-test-app.labels" . -}}
+{{- $selectorLabels := include "istio-test-app.selectorLabels" . -}}
 apiVersion: networking.istio.io/v1beta1
 kind: VirtualService
 metadata:
-  name: {{ include "test-app.fullname" . }}-vsvc
+  name: {{ $serviceName }}-vsvc
   labels:
-    {{- include "test-app.labels" . | nindent 4 }}
+    {{ $labels }}
 spec:
   hosts: # host range
   - "web.test-app.com"
@@ -15,13 +18,13 @@ spec:
         prefix: /
     route: # routing 주소 설정
     - destination:
-        host: {{ include "test-app.fullname" . }}-svc
+        host: {{ $serviceName }}
         port:
           number: {{ .Values.service.port }}
         subset: v1
       weight: 90
     - destination:
-        host: {{ include "test-app.fullname" . }}-svc
+        host: {{ $serviceName }}
         port:
           number: {{ .Values.service.port }}
         subset: v2

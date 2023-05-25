@@ -1,11 +1,14 @@
+{{- $serviceName := include "istio-test-app.name" . -}}
+{{- $labels := include "istio-test-app.labels" . -}}
+{{- $selectorLabels := include "istio-test-app.selectorLabels" . -}}
 apiVersion: networking.istio.io/v1beta1
 kind: DestinationRule
 metadata:
-  name: {{ include "test-app.fullname" . }}-destrule
+  name: {{ $serviceName }}-destrule
   labels:
-    {{- include "test-app.labels" . | nindent 4 }}
+    {{- $labels | nindent 4 }}
 spec:
-  host: {{ include "test-app.fullname" . }}-svc
+  host: {{ $serviceName }}
   trafficPolicy:
       loadBalancer:
           simple: ROUND_ROBIN

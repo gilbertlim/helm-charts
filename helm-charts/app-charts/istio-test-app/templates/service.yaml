@@ -1,0 +1,18 @@
+{{- $serviceName := include "istio-test-app.name" . -}}
+{{- $serviceLabels := include "istio-test-app.serviceLabels" . -}}
+{{- $selectorLabels := include "istio-test-app.selectorLabels" . -}}
+apiVersion: v1
+kind: Service
+metadata:
+  name: {{ $serviceName }}
+  labels:
+    {{ $serviceLabels | nindent 4 }}
+spec:
+  type: {{ .Values.service.type }}
+  ports:
+    - port: {{ .Values.service.port }}
+      targetPort: 80
+      protocol: TCP
+      name: http
+  selector:
+    {{- $selectorLabels | nindent 4 }}

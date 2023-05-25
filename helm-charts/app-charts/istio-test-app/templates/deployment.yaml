@@ -1,0 +1,74 @@
+{{- $serviceName := include "istio-test-app.name" . -}}
+{{- $labels := include "istio-test-app.labels" . -}}
+{{- $selectorLabels := include "istio-test-app.selectorLabels" . -}}
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ $serviceName }}-dp
+  labels:
+    {{- $labels | nindent 4 }}
+spec:
+  replicas: {{ .Values.replicaCount }}
+  selector:
+    matchLabels:
+      {{ $selectorLabels }}
+  template:
+    metadata:
+      labels:
+        {{- $labels | nindent 8 }}
+        version: v1
+    spec:
+      containers:
+        - name: {{ $serviceName }}
+          image: "{{ .Values.image.repository }}:{{ .Values.image.tag | default .Chart.AppVersion }}"
+          imagePullPolicy: {{ .Values.image.pullPolicy }}
+          ports:
+            - name: http
+              containerPort: 80
+              protocol: TCP
+          livenessProbe:
+            httpGet:
+              path: /
+              port: http
+          readinessProbe:
+            httpGet:
+              path: /
+              port: http
+          resources:
+            {{- toYaml .Values.resources | nindent 12 }}
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ $serviceName }}-dp-v2
+  labels:
+    {{- $labels | nindent 4 }}
+spec:
+  replicas: {{ .Values.replicaCount }}
+  selector:
+    matchLabels:
+      {{ $selectorLabels }}-v2
+  template:
+    metadata:
+      labels:
+        {{- $labels | nindent 8 }}-v2
+        version: v2
+    spec:
+      containers:
+        - name: {{ $serviceName }}-v2
+          image: "{{ .Values.image.repository }}:{{ .Values.image.tag | default .Chart.AppVersion }}"
+          imagePullPolicy: {{ .Values.image.pullPolicy }}
+          ports:
+            - name: http
+              containerPort: 80
+              protocol: TCP
+          livenessProbe:
+            httpGet:
+              path: /
+              port: http
+          readinessProbe:
+            httpGet:
+              path: /
+              port: http
+          resources:
+            {{- toYaml .Values.resources | nindent 12 }}
