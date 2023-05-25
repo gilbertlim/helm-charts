@@ -22,7 +22,6 @@ spec:
         app: test-app        
         version: v2
     spec:
-      serviceAccountName: {{ include "test-app.serviceAccountName" . }}
       containers:
         - name: {{ .Chart.Name }}
           image: "{{ .Values.image.repository }}:{{ .Values.image.tag | default .Chart.AppVersion }}"
