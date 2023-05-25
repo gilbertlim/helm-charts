@@ -1,6 +1,6 @@
 {{- $serviceName := include "rollout-test-app.name" . -}}
 {{- $labels := include "rollout-test-app.labels" . -}}
-{{- $selectorLabels := include "rollout-test-app.selectorlabels" . -}}
+{{- $selectorLabels := include "rollout-test-app.selectorLabels" . -}}
 apiVersion: argoproj.io/v1alpha1
 kind: Rollout
 metadata:
@@ -26,9 +26,9 @@ spec:
           ports:
             - containerPort: {{ .Values.application.server.port }}
           livenessProbe:
-            {{-toYaml .Values.livenessProbe | nindent 12 }}
+            {{- toYaml .Values.livenessProbe | nindent 12 }}
           readinessProbe:
-            {{-toYaml .Values.readinessProbe | nindent 12 }}
+            {{- toYaml .Values.readinessProbe | nindent 12 }}
   strategy:
     {{- if eq .Values.rollout.strategy "bluegreen" }}
     blueGreen:
