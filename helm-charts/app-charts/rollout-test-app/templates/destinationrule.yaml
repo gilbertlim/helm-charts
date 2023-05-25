@@ -1,0 +1,24 @@
+{{- $serviceName := include "rollout-test-app.name" . -}}
+apiVersion: networking.istio.io/v1beta1
+kind: DestinationRule
+metadata:
+  name: {{ $serviceName }}-destrule
+spec:
+  host: {{ $serviceName }}
+{{- if eq .Values.rollout.strategy "canary" }}
+  subsets:
+  - name: stable
+    labels:
+      version: stable
+  - name: canary
+    labels:
+      version: stable
+  {{- else if eq .Values.rollout.strategy "bluegreen" }}
+  subsets:
+  - name: stable
+    labels:
+      app: {{ .Chart.Name }}
+  - name: preview
+    labels:
+      app: {{ .Chart.Name }}
+  {{- end }}

@@ -4,7 +4,6 @@ metadata:
   name: {{ include "test-app.fullname" . }}-v2
   labels:
     {{- include "test-app.labels" . | nindent 4 }}-v2
-    # {{- "sidecar.istio.io/inject: false" | nindent 4 }}
 spec:
   {{- if not .Values.autoscaling.enabled }}
   replicas: {{ .Values.replicaCount }}

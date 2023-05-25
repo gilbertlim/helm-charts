@@ -1,0 +1,65 @@
+{{- $serviceName := include "rollout-test-app.name" . -}}
+{{- $labels := include "rollout-test-app.labels" . -}}
+{{- $selectorLabels := include "rollout-test-app.selectorlabels" . -}}
+apiVersion: argoproj.io/v1alpha1
+kind: Rollout
+metadata:
+  name: {{ $serviceName }}-dp
+  labels:
+    {{- $labels | nindent 4 }}
+spec:
+  replicas: {{ .Values.replicaCount }}
+  selector:
+    matchLabels:
+      {{- $selectorLabels | nindent 6 }}
+  template:
+    metadata:
+      labels:
+        {{- $labels | nindent 8 }}
+    spec:
+      containers:
+        - name: {{ $serviceName }}-test
+          image: "{{ .Values.image.repository }}:{{ .Values.image.tag | default .Chart.AppVersion }}"
+          imagePullPolicy: {{ .Values.image.pullPolicy }}
+          resources:
+            {{- toYaml .Values.resources | nindent 12 }}
+          ports:
+            - containerPort: {{ .Values.application.server.port }}
+          livenessProbe:
+            {{-toYaml .Values.livenessProbe | nindent 12 }}
+          readinessProbe:
+            {{-toYaml .Values.readinessProbe | nindent 12 }}
+  strategy:
+    {{- if eq .Values.rollout.strategy "bluegreen" }}
+    blueGreen:
+      activeService: {{ $serviceName }}
+      previewService: {{ $serviceName }}-preview
+      autoPromotionEnabled: {{ .Values.rollout.autoPromotionEnabled }}
+    {{- else if eq .Values.rollout.strategy "canary" }}
+    canary:
+      steps:
+      - setWeight: 5
+      - pause: 
+          duration: 10
+      - setWeight: 25
+      - pause: 
+          duration: 10
+      - setWeight: 55
+      - pause:
+          duration: 10
+      - setWeight: 75
+      - pause: 
+          duration: 10
+      maxSurge: {{ .Values.rollout.maxSurge | default "25%" }}
+      maxUnavailable: {{ .Values.rollout.maxUnavailable | default "25%" }}
+      trafficRouting:
+        istio:
+          destinationRule:
+            canarySubsetName: canary
+            name: {{ $serviceName }}-destrule
+            stableSubsetName: stable
+          virtualService:
+            name: {{ $serviceName }}-vsvc
+            routes:
+            - primary    
+    {{- end }}
