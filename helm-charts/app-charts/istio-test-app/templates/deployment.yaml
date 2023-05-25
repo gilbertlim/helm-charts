@@ -4,18 +4,19 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: {{ $serviceName }}-dp
+  name: {{ $serviceName }}-dp-v1
   labels:
     {{- $labels | nindent 4 }}
 spec:
   replicas: {{ .Values.replicaCount }}
   selector:
     matchLabels:
-      {{ $selectorLabels }}
+      {{ $selectorLabels }}-v1
   template:
     metadata:
       labels:
         {{- $labels | nindent 8 }}
+        {{- $labels | nindent 8 }}-v1
         version: v1
     spec:
       containers:
@@ -51,6 +52,7 @@ spec:
   template:
     metadata:
       labels:
+        {{- $labels | nindent 8 }}
         {{- $labels | nindent 8 }}-v2
         version: v2
     spec:
