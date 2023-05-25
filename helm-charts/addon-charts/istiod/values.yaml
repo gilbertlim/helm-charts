@@ -10,7 +10,7 @@ pilot:
   rollingMaxUnavailable: 25%
 
   hub: ""
-  tag: "1.17.2"
+  tag: ""
   variant: ""
 
   # Can be a full hub/image:tag
