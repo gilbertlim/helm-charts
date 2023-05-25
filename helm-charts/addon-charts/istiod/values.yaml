@@ -14,7 +14,7 @@ pilot:
   variant: ""
 
   # Can be a full hub/image:tag
-  image: pilot
+  image: docker.io/istio/pilot:1.17.2
   traceSampling: 1.0
 
   # Resources for a small pilot install
