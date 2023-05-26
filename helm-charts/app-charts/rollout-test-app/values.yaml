@@ -27,8 +27,7 @@ resources: {}
   #   memory: 128
 
 rollout:
-  strategy:
-    bluegreen
+  strategy: bluegreen
   autoPromotionEnabled: false
 
 livenessProbe:
