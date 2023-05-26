@@ -41,14 +41,14 @@ pinpoint-hbase:
     pullPolicy: IfNotPresent
   resources:
     requests:
-      memory: "4Gi"
+      memory: "1Gi" # "4Gi"
       cpu: "1"
   zookeeper:
     host:
 
   persistence:
     enabled: true
-    size: 10Gi
+    size: 2Gi # 10Gi
 
 pinpoint-collector:
   image:
