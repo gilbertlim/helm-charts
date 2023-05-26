@@ -9,10 +9,6 @@ application:
   server:
     port: 8080
 
-imagePullSecrets: []
-nameOverride: ""
-fullnameOverride: ""
-
 service:
   type: ClusterIP
   port: 80
@@ -30,15 +26,6 @@ rollout:
   strategy:
     bluegreen
   autoPromotionEnabled: false
-
-livenessProbe:
-  httpGet:
-    path: /
-    port: 80
-readinessProbe:
-  httpGet:
-    path: /
-    port: 80
 
 pinpoint:
   enabled: true
