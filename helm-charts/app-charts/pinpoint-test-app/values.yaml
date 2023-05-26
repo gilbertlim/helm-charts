@@ -1,0 +1,47 @@
+replicaCount: 2
+
+image:
+  repository: dstar55/docker-hello-world-spring-boot
+  pullPolicy: IfNotPresent
+  tag: "latest"
+
+application:
+  server:
+    port: 8080
+
+imagePullSecrets: []
+nameOverride: ""
+fullnameOverride: ""
+
+service:
+  type: ClusterIP
+  port: 80
+  targetport: 8080
+
+resources: {}
+  # limits:
+  #   cpu: 100m
+  #   memory: 128Mi
+  # requests:
+  #   cpu: 100m
+  #   memory: 128
+
+rollout:
+  strategy:
+    bluegreen
+  autoPromotionEnabled: false
+
+livenessProbe:
+  httpGet:
+    path: /
+    port: 80
+readinessProbe:
+  httpGet:
+    path: /
+    port: 80
+
+pinpoint:
+  enabled: true
+  version: 2.5.1
+
+hostName: pinpoint.test-app.com
