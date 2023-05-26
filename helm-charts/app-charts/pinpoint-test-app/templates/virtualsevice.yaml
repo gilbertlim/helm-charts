@@ -5,7 +5,7 @@ metadata:
   name: {{ $serviceName }}-vsvc
 spec:
   hosts:
-  - {{ $serviceName }}
+  - {{ .Values.hostName }}
   gateways:
   - msa-gateway
   http:
