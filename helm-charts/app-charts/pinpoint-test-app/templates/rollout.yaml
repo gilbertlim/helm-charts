@@ -40,10 +40,14 @@ spec:
           ports:
             - containerPort: {{ .Values.application.server.port }}
           env:
+            - name: POD_NAME
+              valueFrom: {fieldRef: {fieldPath: metadata.name}}
             - name: JAVA_TOOL_OPTIONS
               value: >-
                 {{- if .Values.pinpoint.enabled }}
                 -javaagent:/pinpoint-volume/pinpoint-agent/pinpoint-bootstrap-{{ .Values.pinpoint.version }}.jar
+                -Dpinpoint.agentId={POD_NAME}
+                -Dpinpoint.applicationName={{ $serviceName }}
                 {{- end }}
           volumeMounts:
             - name: pinpoint-volume
