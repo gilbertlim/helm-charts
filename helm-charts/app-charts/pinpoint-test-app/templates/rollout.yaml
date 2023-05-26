@@ -25,7 +25,7 @@ spec:
           command: ["/bin/sh", "-c"]
           args: 
             - >
-              cp -rf /pinpoint-agent /pinpoint-volume;
+              cp -rf /pinpoint-agent/pinpoint-bootstrap-{{ .Values.pinpoint.version }}.jar /pinpoint-volume/pinpoint-bootstrap-{{ .Values.pinpoint.version }}.jar;
               ls -R /pinpoint-volume;
           volumeMounts:
             - name: pinpoint-volume
