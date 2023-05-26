@@ -10,7 +10,7 @@ spec:
   - msa-gateway
   http:
     - name: primary
-      {{- if eq .Values.pinpoint.strategy "canary" }}
+      {{- if eq .Values.rollout.strategy "canary" }}
       route:
       - destination:
           host: {{ $serviceName }}
@@ -24,7 +24,7 @@ spec:
           port:
             number: {{ .Values.service.targetport }}
         weight: 0
-      {{- else if eq .Values.pinpoint.strategy "bluegreen" }} 
+      {{- else if eq .Values.rollout.strategy "bluegreen" }} 
       route:
       - destination:
           host: {{ $serviceName }}
