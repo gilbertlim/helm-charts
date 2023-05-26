@@ -48,6 +48,7 @@ spec:
                 -javaagent:/pinpoint-volume/pinpoint-agent/pinpoint-bootstrap-{{ .Values.pinpoint.version }}.jar
                 -Dpinpoint.agentId={POD_NAME}
                 -Dpinpoint.applicationName={{ $serviceName }}
+                -Dpinpoint.container
                 {{- end }}
           volumeMounts:
             - name: pinpoint-volume
