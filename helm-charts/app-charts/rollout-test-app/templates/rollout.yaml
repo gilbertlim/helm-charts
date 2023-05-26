@@ -18,7 +18,7 @@ spec:
         {{- $labels | nindent 8 }}
     spec:
       containers:
-        - name: {{ $serviceName }}-test
+        - name: {{ $serviceName }}
           image: "{{ .Values.image.repository }}:{{ .Values.image.tag | default .Chart.AppVersion }}"
           imagePullPolicy: {{ .Values.image.pullPolicy }}
           resources:
