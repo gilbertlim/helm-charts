@@ -39,10 +39,6 @@ spec:
             {{- toYaml .Values.resources | nindent 12 }}
           ports:
             - containerPort: {{ .Values.application.server.port }}
-          livenessProbe:
-            {{- toYaml .Values.livenessProbe | nindent 12 }}
-          readinessProbe:
-            {{- toYaml .Values.readinessProbe | nindent 12 }}
           env:
             - name: JAVA_TOOL_OPTIONS
               value: >-
