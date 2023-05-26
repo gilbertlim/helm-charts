@@ -23,7 +23,8 @@ spec:
           image: pinpointdocker/pinpoint-agent:{{ .Values.pinpoint.version }}
           imagePullPolicy: IfNotPresent
           command: ["/bin/sh", "-c"]
-          args: ->
+          args: 
+            - >
             cp -rf /pinpoint /pinpoint-volume;
             ls -R /pinpoint-volume;
           volumeMounts:
