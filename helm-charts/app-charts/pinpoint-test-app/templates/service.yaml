@@ -17,7 +17,7 @@ spec:
   selector:
     {{ $selectorLabels | nindent 4 }}
 ---
-{{- if eq .Values.pinpoint.strategy "bluegreen" }}
+{{- if eq .Values.rollout.strategy "bluegreen" }}
 apiVersion: v1
 kind: Service
 metadata:
