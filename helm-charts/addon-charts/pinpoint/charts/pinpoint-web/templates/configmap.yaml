@@ -1,0 +1,17 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: {{ template "pinpoint-web.fullname" . }}
+  labels:
+{{ include "pinpoint-web.labels" . | indent 4 }}
+data:
+  SPRING_PROFILES_ACTIVE: "{{ .Values.profiles }}"
+  WEB_SERVER_PORT: "{{ .Values.serverPort }}"
+  PINPOINT_ZOOKEEPER_ADDRESS: "{{ include "pinpoint-web.zookeeper.fullname" . }}"
+  CLUSTER_ENABLE: "{{ .Values.clusterEnable }}"
+  CONFIG_SENDUSAGE: "{{ .Values.sendUsage }}"
+  LOGGING_LEVEL_ROOT: "{{ .Values.loggingLevelRoot }}"
+  CONFIG_SHOW_APPLICATIONSTAT: "{{ .Values.showApplicationStat }}"
+  JDBC_DRIVERCLASSNAME: "com.mysql.jdbc.Driver"
+  JDBC_URL: "{{ include "pinpoint-web.mysql.url" .}}"
+  WEBHOOK_ENABLE: "{{ default false .Values.global.webhookEnabled }}"
