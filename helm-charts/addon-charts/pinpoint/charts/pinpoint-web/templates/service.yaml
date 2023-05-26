@@ -11,8 +11,8 @@ metadata:
 spec:
   ports:
     - name: ui
-      port: 8080
+      port: {{ .Values.service.port }}
       targetPort: 8080
-
+  type: {{ .Values.service.type }}
   selector:
 {{ include "pinpoint-web.selectorLabels" . | indent 6 }}
