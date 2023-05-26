@@ -17,7 +17,7 @@
 
 minikube 시작
 
-`minikube start --cpus 4 --memory 6g`
+`minikube start --cpus 4 --memory 8g`
 
 LoadBalancer type의 Service 접속 설정
 `sudo minikube tunnel --cleanup`
@@ -57,6 +57,7 @@ chart 생성 방법
 ```sh
 git clone https://github.com/argoproj/argo-helm.git
 cp -r argo-helm/charts/argo-cd . # 해당 폴더를 chart로 생성
+rm -rf argo-helm
 
 # dependency
 helm repo add redis-ha https://dandydeveloper.github.io/charts 
@@ -123,7 +124,7 @@ charts
 - ArgoCD 앱에서 설치
 
 접속
-- Chrome extension ModHeader 사용 후 `Host: web.test-app.com` 헤더 적용
+- Chrome extension ModHeader 사용 후 `Host: istio.test-app.com` 헤더 적용
 - http://127.0.0.1
 
 <br>
@@ -158,6 +159,17 @@ rm *.tgz
 # instio-ingress
 git clone https://github.com/istio/istio.git
 cp -r istio/manifests/charts/gateways/istio-ingress .
+```
+
+values.yaml 수정
+```yaml
+pilot:
+  # ...
+  # Resources for a small pilot install
+  resources:
+    requests:
+      cpu: 500m
+      memory: 1024Mi # 2048Mi
 ```
 
 설치
@@ -297,3 +309,60 @@ adminPassword: admin #strongpassword
 - id : admin (`kubectl get secret -n monitoring grafana -o jsonpath='{.data.admin-user}' | base64 -d`)
 - password : admin (`kubectl get secret -n monitoring grafana -o jsonpath='{.data.admin-password}' | base64 -d`)
 - http://localhost:50001
+
+<br>
+
+## Pinpoint
+
+> namespace: monitoring
+
+charts
+- addon-charts/pinpoint
+
+chart 생성 방법
+```sh
+git clone https://github.com/headless-dev/pinpoint-kubernetes.git
+cp -r pinpoint-kubernetes/pinpoint . # 해당 폴더를 chart로 생성
+rm -rf pinpoint-kubernetes
+
+# helm repo add mysql https://charts.helm.sh/stable                            
+
+# > helm repo add gradiant https://gradiant.github.io/bigdata-charts
+# > helm repo add incubator https://charts.helm.sh/incubator
+# > helm repo add stable https://charts.helm.sh/stable
+# helm dependency update .
+```
+
+pinpoint/values.yaml 수정
+```yaml
+pinpoint-hbase:
+  #...
+  resources:
+    requests:
+      memory: "1Gi" # "4Gi"
+      cpu: "1"
+```
+
+pinpoint/charts/pinpoint-hbase/values.yaml 수정
+```yaml
+resources:
+  requests:
+    memory: "1Gi" # "4Gi"
+    cpu: "1"
+```
+
+pinpoint/charts/pinpoint-web/templates/service.yaml 수정
+```yaml
+spec:
+  ports:
+    - name: ui
+      port: {{ .Values.service.port }}
+      targetPort: 8080
+  type: {{ .Values.service.type }}
+```
+pinpoint/charts/pinpoint-web/values.yaml 수정
+```yaml
+service:
+  type: LoadBalancer
+  port: 40001
+```
