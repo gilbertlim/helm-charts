@@ -25,8 +25,8 @@ spec:
           command: ["/bin/sh", "-c"]
           args: 
             - >
-            cp -rf /pinpoint /pinpoint-volume;
-            ls -R /pinpoint-volume;
+              cp -rf /pinpoint /pinpoint-volume;
+              ls -R /pinpoint-volume;
           volumeMounts:
             - name: pinpoint-volume
               mountPath: /pinpoint-volume
