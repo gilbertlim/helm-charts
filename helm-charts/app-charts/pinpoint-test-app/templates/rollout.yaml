@@ -25,7 +25,7 @@ spec:
           command: ["/bin/sh", "-c"]
           args: 
             - >
-              cp -rf /pinpoint-agent/pinpoint-bootstrap-{{ .Values.pinpoint.version }}.jar /pinpoint-volume/pinpoint-bootstrap-{{ .Values.pinpoint.version }}.jar;
+              cp -rf /pinpoint-agent /pinpoint-volume;
               ls -R /pinpoint-volume;
           volumeMounts:
             - name: pinpoint-volume
@@ -47,7 +47,7 @@ spec:
             - name: JAVA_TOOL_OPTIONS
               value: >-
                 {{- if .Values.pinpoint.enabled }}
-                -javaagent:/pinpoint-volume/pinpoint-bootstrap-{{ .Values.pinpoint.version }}.jar
+                -javaagent:/pinpoint-volume/pinpoint-agent/pinpoint-bootstrap-{{ .Values.pinpoint.version }}.jar
                 {{- end }}
           volumeMounts:
             - name: pinpoint-volume
