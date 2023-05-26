@@ -48,7 +48,7 @@ pinpoint-hbase:
 
   persistence:
     enabled: true
-    size: 2Gi # 10Gi
+    size: 10Gi
 
 pinpoint-collector:
   image:
