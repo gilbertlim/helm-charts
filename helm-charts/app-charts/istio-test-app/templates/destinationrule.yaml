@@ -8,7 +8,7 @@ metadata:
   labels:
     {{- $labels | nindent 4 }}
 spec:
-  host: {{ $serviceName }}
+  host: {{ .Values.hostName }}
   trafficPolicy:
       loadBalancer:
           simple: ROUND_ROBIN

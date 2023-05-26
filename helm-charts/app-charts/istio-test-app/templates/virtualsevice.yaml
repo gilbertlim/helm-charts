@@ -9,7 +9,7 @@ metadata:
     {{ $labels }}
 spec:
   hosts: # host range
-  - "web.test-app.com"
+  - {{ .Values.hostName }}
   gateways: # ingress gateway
   - msa-gateway
   http:

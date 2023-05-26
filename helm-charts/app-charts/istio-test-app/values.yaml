@@ -10,3 +10,5 @@ service:
   port: 80
 
 resources: {}
+
+hostName: istio.test-app.com
