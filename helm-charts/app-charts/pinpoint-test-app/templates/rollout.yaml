@@ -47,7 +47,7 @@ spec:
             - name: JAVA_TOOL_OPTIONS
               value: >-
                 {{- if .Values.pinpoint.enabled }}
-                -javaagent:/pinpoint-volume/pinpoint-agent/pinpoint-bootstrap-{{ .Values.pinpoint.version }}.jar
+                -javaagent:/pinpoint-volume/pinpoint-bootstrap-{{ .Values.pinpoint.version }}.jar
                 {{- end }}
           volumeMounts:
             - name: pinpoint-volume
