@@ -7,4 +7,4 @@ ingressGateway:
       name: http
       protocol: HTTP
     hosts:
-    - "web.test-app.com"
+    - "*"
