@@ -9,22 +9,10 @@ spec:
     namespace: monitoring
     server: {{ .Values.spec.destination.server }}
   project: default
-  sources:
-    - path: helm-charts/addon-charts/pinpoint-hbase
-      repoURL: {{ .Values.spec.source.repoURL }}
-      targetRevision: {{ .Values.spec.source.targetRevision }}
-      helm:
-        valueFiles: 
-          - {{ .Values.valueFiles }}
-    - path: helm-charts/addon-charts/pinpoint-collector
-      repoURL: {{ .Values.spec.source.repoURL }}
-      targetRevision: {{ .Values.spec.source.targetRevision }}
-      helm:
-        valueFiles: 
-          - {{ .Values.valueFiles }}
-    - path: helm-charts/addon-charts/pinpoint-web
-      repoURL: {{ .Values.spec.source.repoURL }}
-      targetRevision: {{ .Values.spec.source.targetRevision }}
-      helm:
-        valueFiles: 
-          - {{ .Values.valueFiles }}          
+  source:
+    path: helm-charts/addon-charts/pinpoint
+    repoURL: {{ .Values.spec.source.repoURL }}
+    targetRevision: {{ .Values.spec.source.targetRevision }}
+    helm:
+      valueFiles: 
+        - {{ .Values.valueFiles }}          
