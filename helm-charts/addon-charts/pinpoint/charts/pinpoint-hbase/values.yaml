@@ -19,6 +19,9 @@ resources:
   requests:
     memory: "512Mi" # "4Gi"
     cpu: "500m" # "1"
+  limits:
+    memory: "512Mi"
+    cpu: "500m"
 
 persistence:
   enabled: true
