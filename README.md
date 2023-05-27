@@ -169,7 +169,7 @@ pilot:
   resources:
     requests:
       cpu: 500m
-      memory: 1024Mi # 2048Mi
+      memory: 512Mi # 2048Mi
 ```
 
 설치
@@ -339,16 +339,16 @@ pinpoint-hbase:
   #...
   resources:
     requests:
-      memory: "1Gi" # "4Gi"
-      cpu: "1"
+      memory: "512Mi" # "4Gi"
+      cpu: "500m" # "1"
 ```
 
 pinpoint/charts/pinpoint-hbase/values.yaml 수정
 ```yaml
 resources:
   requests:
-    memory: "1Gi" # "4Gi"
-    cpu: "1"
+    memory: "512Mi" # "4Gi"
+    cpu: "500m" # "1"
 ```
 
 pinpoint/charts/pinpoint-web/templates/service.yaml 수정

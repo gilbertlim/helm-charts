@@ -17,8 +17,8 @@ tolerations:
 serviceType: NodePort
 resources:
   requests:
-    memory: "1Gi" # "4Gi"
-    cpu: "1"
+    memory: "512Mi" # "4Gi"
+    cpu: "500m" # "1"
 
 persistence:
   enabled: true
