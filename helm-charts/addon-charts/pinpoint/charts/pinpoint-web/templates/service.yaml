@@ -9,6 +9,7 @@ metadata:
   labels:
 {{ include "pinpoint-web.labels" . | indent 4 }}
 spec:
+  type: LoadBalancer
   ports:
     - name: ui
       port: 40001
