@@ -6,7 +6,7 @@ metadata:
   - resources-finalizer.argocd.argoproj.io
 spec:
   destination:
-    namespace: monitoring
+    namespace: kube-system
     server: {{ .Values.spec.destination.server }}
   project: default
   source:
