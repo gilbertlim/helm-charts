@@ -16,11 +16,11 @@ service:
 
 resources:
   limits:
-    cpu: 250m
+    cpu: 500m
     memory: 512Mi
-  # requests:
-  #   cpu: 100m
-  #   memory: 512Mi
+  requests:
+    cpu: 500m
+    memory: 512Mi
 
 rollout:
   strategy: bluegreen
