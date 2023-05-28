@@ -41,7 +41,7 @@ pinpoint-hbase:
     pullPolicy: IfNotPresent
   resources:
     requests:
-      memory: "4Gi"
+      memory: "1Gi"
       cpu: "1"
   zookeeper:
     host:
