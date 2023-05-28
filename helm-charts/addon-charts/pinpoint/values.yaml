@@ -115,7 +115,7 @@ pinpoint-mysql:
   database: pinpoint
   resources:
     requests:
-      memory: "512Mi"
+      memory: "256Mi"
       cpu: "250m"
   affinity: {}
   persistence:
