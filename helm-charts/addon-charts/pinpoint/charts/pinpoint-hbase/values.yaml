@@ -17,11 +17,11 @@ tolerations:
 serviceType: NodePort
 resources:
   requests:
-    memory: "512Mi" # "4Gi"
-    cpu: "500m" # "1"
+    memory: "1Gi" # "4Gi"
+    cpu: "1000m" # "1"
   limits:
-    memory: "512Mi"
-    cpu: "500m"
+    memory: "1Gi"
+    cpu: "1000m"
 
 persistence:
   enabled: true
