@@ -50,3 +50,7 @@ resources:
 zookeeper:
   # headless service: pinpoint-zookeeper-headless
   host: pinpoint-zookeeper
+
+service:
+  type: LoadBalancer
+  port: 40001  

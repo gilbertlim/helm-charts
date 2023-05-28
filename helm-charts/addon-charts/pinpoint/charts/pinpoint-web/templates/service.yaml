@@ -9,11 +9,11 @@ metadata:
   labels:
 {{ include "pinpoint-web.labels" . | indent 4 }}
 spec:
-  type: LoadBalancer
   ports:
     - name: ui
-      port: 40001
+      port: {{ .Values.service.port }}
       targetPort: 8080
+  type: {{ .Values.service.type }}
 
   selector:
 {{ include "pinpoint-web.selectorLabels" . | indent 6 }}
