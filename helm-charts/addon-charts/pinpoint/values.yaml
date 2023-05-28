@@ -41,8 +41,8 @@ pinpoint-hbase:
     pullPolicy: IfNotPresent
   resources:
     requests:
-      memory: "1Gi" # "4Gi"
-      cpu: "1000m" # "1"
+      memory: "4Gi"
+      cpu: "1"
   zookeeper:
     host:
 
@@ -85,7 +85,7 @@ pinpoint-web:
   resources:
     requests:
       memory: "512Mi"
-      cpu: "100m"
+      cpu: "250m"
   clusterEnable: true
 
   adminPassword: admin
@@ -116,7 +116,7 @@ pinpoint-mysql:
   resources:
     requests:
       memory: "512Mi"
-      cpu: "500m"
+      cpu: "250m"
   affinity: {}
   persistence:
     enabled: false

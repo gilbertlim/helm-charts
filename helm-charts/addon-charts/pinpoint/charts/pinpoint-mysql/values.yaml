@@ -13,10 +13,7 @@ database: pinpoint
 resources:
   requests:
     memory: "512Mi"
-    cpu: "500m"
-  limits:
-    memory: "512Mi"
-    cpu: "500m"    
+    cpu: "250m"
 
 affinity: {}
 

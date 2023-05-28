@@ -44,16 +44,9 @@ mysql:
 
 resources:
   requests:
-    memory: "512Mi"
+    memory: "256Mi"
     cpu: "100m"
-  limits:
-    memory: "512Mi"
-    cpu: "100m"    
 
 zookeeper:
   # headless service: pinpoint-zookeeper-headless
   host: pinpoint-zookeeper
-
-service:
-  type: LoadBalancer
-  port: 40001

@@ -25,10 +25,7 @@ image:
 resources:
   requests:
     memory: "512Mi"
-    cpu: "250m"
-  limits:
-    memory: "512Mi"
-    cpu: "250m"
+    cpu: "256m"
 
 receiver:
   grpc:
