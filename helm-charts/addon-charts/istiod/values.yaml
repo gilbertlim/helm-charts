@@ -20,11 +20,11 @@ pilot:
   # Resources for a small pilot install
   resources:
     requests:
-      cpu: 500m
-      memory: 512Mi # 2048Mi
+      cpu: 200m
+      memory: 256Mi # 2048Mi
     limits:
-      cpu: 500m
-      memory: 512Mi # 2048Mi      
+      cpu: 200m
+      memory: 256Mi # 2048Mi      
 
   # Set to `type: RuntimeDefault` to use the default profile if available.
   seccompProfile: {}

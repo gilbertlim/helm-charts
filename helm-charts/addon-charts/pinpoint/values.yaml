@@ -42,7 +42,7 @@ pinpoint-hbase:
   resources:
     requests:
       memory: "1Gi"
-      cpu: "1"
+      cpu: "250m"
   zookeeper:
     host:
 
@@ -58,7 +58,7 @@ pinpoint-collector:
   resources:
     requests:
       memory: "512Mi"
-      cpu: "250m"
+      cpu: "200m"
   receiver:
     grpc:
       agentPort: 9991

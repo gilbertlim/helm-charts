@@ -66,9 +66,9 @@ deployment:
   resources:
     requests:
       cpu: "10m"
-      memory: "64Mi"
+      memory: "256Mi"
     limits:
-      memory: "1Gi"
+      memory: "256Mi"
   secret_name: "kiali"
   security_context: {}
   service_annotations: {}
