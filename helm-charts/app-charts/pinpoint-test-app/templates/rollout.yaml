@@ -48,6 +48,7 @@ spec:
                 -javaagent:/pinpoint-volume/pinpoint-agent/pinpoint-bootstrap-{{ .Values.pinpoint.version }}.jar
                 -Dpinpoint.agentId={POD_NAME}
                 -Dpinpoint.applicationName={{ $serviceName }}
+                -Dprofiler.transport.grpc.collector.ip=pinpoint-pinpoint-collector.monitoring.svc.cluster.local
                 -Dpinpoint.container
                 {{- end }}
           volumeMounts:
