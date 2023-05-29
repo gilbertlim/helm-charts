@@ -49,6 +49,7 @@ spec:
                 -Dpinpoint.agentId={POD_NAME}
                 -Dpinpoint.applicationName={{ $serviceName }}
                 -Dprofiler.transport.grpc.collector.ip=pinpoint-pinpoint-collector.monitoring.svc.cluster.local
+                -Dpinpoint.profiler.profiles.active=release
                 {{- end }}
           volumeMounts:
             - name: pinpoint-volume
