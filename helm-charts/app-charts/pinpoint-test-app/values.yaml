@@ -24,7 +24,7 @@ resources:
 
 rollout:
   strategy: bluegreen
-  autoPromotionEnabled: false
+  autoPromotionEnabled: true
 
 pinpoint:
   enabled: true

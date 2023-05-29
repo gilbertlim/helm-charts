@@ -28,7 +28,7 @@ resources:
 
 rollout:
   strategy: bluegreen
-  autoPromotionEnabled: false
+  autoPromotionEnabled: true
 
 livenessProbe:
   httpGet:
