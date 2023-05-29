@@ -161,17 +161,6 @@ git clone https://github.com/istio/istio.git
 cp -r istio/manifests/charts/gateways/istio-ingress .
 ```
 
-values.yaml 수정
-```yaml
-pilot:
-  # ...
-  # Resources for a small pilot install
-  resources:
-    requests:
-      cpu: 500m
-      memory: 512Mi # 2048Mi
-```
-
 설치
 - ArgoCD 앱에서 설치
 - 순서: istio-base -> istiod -> istio-ingress
@@ -324,31 +313,6 @@ chart 생성 방법
 git clone https://github.com/headless-dev/pinpoint-kubernetes.git
 cp -r pinpoint-kubernetes/pinpoint . # 해당 폴더를 chart로 생성
 rm -rf pinpoint-kubernetes
-
-# helm repo add mysql https://charts.helm.sh/stable                            
-
-# > helm repo add gradiant https://gradiant.github.io/bigdata-charts
-# > helm repo add incubator https://charts.helm.sh/incubator
-# > helm repo add stable https://charts.helm.sh/stable
-# helm dependency update .
-```
-
-pinpoint/values.yaml 수정
-```yaml
-pinpoint-hbase:
-  #...
-  resources:
-    requests:
-      memory: "512Mi" # "4Gi"
-      cpu: "500m" # "1"
-```
-
-pinpoint/charts/pinpoint-hbase/values.yaml 수정
-```yaml
-resources:
-  requests:
-    memory: "512Mi" # "4Gi"
-    cpu: "500m" # "1"
 ```
 
 pinpoint/charts/pinpoint-web/templates/service.yaml 수정
@@ -360,6 +324,7 @@ spec:
       targetPort: 8080
   type: {{ .Values.service.type }}
 ```
+
 pinpoint/charts/pinpoint-web/values.yaml 수정
 ```yaml
 service:
