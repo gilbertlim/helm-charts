@@ -3,6 +3,9 @@ apiVersion: v1
 kind: Namespace
 metadata:
   name: {{ $name }}
-
+  {{- if eq $name "msa" }}
+  labels:
+    {{- "istio-injection: enabled" | nindent 4 }}
+  {{- end }}
 ---
 {{- end }}
