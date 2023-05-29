@@ -46,10 +46,9 @@ spec:
               value: >-
                 {{- if .Values.pinpoint.enabled }}
                 -javaagent:/pinpoint-volume/pinpoint-agent/pinpoint-bootstrap-{{ .Values.pinpoint.version }}.jar
-                -Dpinpoint.agentId={POD_NAME}
-                -Dpinpoint.applicationName={{ $serviceName }}
+                -Dpinpoint.agentId={{ $serviceName }}
+                -Dpinpoint.applicationName=msa
                 -Dprofiler.transport.grpc.collector.ip=pinpoint-pinpoint-collector.monitoring.svc.cluster.local
-                -Dpinpoint.profiler.profiles.active=release
                 {{- end }}
           volumeMounts:
             - name: pinpoint-volume
