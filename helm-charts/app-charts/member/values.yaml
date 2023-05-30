@@ -36,3 +36,6 @@ readinessProbe:
   httpGet:
     path: /members
     port: 8080
+
+serviceAccount:
+  annotations: {}
