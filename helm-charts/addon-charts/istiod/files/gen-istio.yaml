@@ -2885,30 +2885,6 @@ spec:
             value:
               {}
 ---
-apiVersion: networking.istio.io/v1alpha3
-kind: EnvoyFilter
-metadata:
-  name: max-header
-  namespace: msa
-spec:
-  workloadSelector:
-    labels:
-      app: pinpoint-test-app
-  configPatches:
-  - applyTo: HTTP_FILTER
-    match:
-      context: ANY
-      listener:
-        filterChain:
-          filter:
-            name: "envoy.http_connection_manager"
-    patch:
-      operation: MERGE
-      value:
-        typed_config:
-          "@type": type.googleapis.com/envoy.extensions.filters.network.http_connection_manager.v3.HttpConnectionManager
-          max_request_headers_kb: 1024
----
 # Source: istiod/templates/mutatingwebhook.yaml
 apiVersion: admissionregistration.k8s.io/v1
 kind: MutatingWebhookConfiguration
