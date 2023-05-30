@@ -6,7 +6,7 @@ metadata:
   - resources-finalizer.argocd.argoproj.io
 spec:
   destination:
-    namespace: msa
+    namespace: pinpoint
     server: {{ .Values.spec.destination.server }}
   project: default
   source:

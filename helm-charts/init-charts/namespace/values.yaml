@@ -3,3 +3,4 @@ namespace:
   - istio-system
   - monitoring
   - argocd
+  - pinpoint
