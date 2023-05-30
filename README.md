@@ -16,7 +16,7 @@
 ## Quick Start
 
 1. `minikube start --cpus 4 --memory 8g`
-2. `minikube addons enable metrics-server`
+2. `sudo minikube addons enable metrics-server`
 3. `sudo minikube tunnel --cleanup`
 4. open new terminal
 5. `git clone https://github.com/gilbertlim/helm-charts`
