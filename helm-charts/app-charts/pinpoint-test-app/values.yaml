@@ -12,7 +12,7 @@ application:
     port: 8080
 
 service:
-  type: ClusterIP
+  type: LoadBalancer # ClusterIP
   port: 8080
   targetport: 8080
 
