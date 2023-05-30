@@ -2,7 +2,7 @@ apiVersion: networking.istio.io/v1alpha3
 kind: EnvoyFilter
 metadata:
   name: max-header
-  namespace: istio-system
+  namespace: msa
 spec:
 configPatches:
 - applyTo: NETWORK_FILTER
