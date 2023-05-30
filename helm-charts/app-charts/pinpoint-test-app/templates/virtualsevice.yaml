@@ -37,4 +37,3 @@ spec:
             number: {{ .Values.service.targetport }}
         weight: 0
       {{- end }}
-    maxRequestHeadersKb: 1024
