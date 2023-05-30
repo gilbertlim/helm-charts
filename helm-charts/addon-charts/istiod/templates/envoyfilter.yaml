@@ -4,8 +4,10 @@ metadata:
   name: max-header
   namespace: msa
 spec:
+  workloadLabels:
+    app: pinpoint-test-app
   configPatches:
-  - applyTo: NETWORK_FILTER
+  - applyTo: HTTP_FILTER
     match:
       context: ANY
       listener:
@@ -16,5 +18,6 @@ spec:
       operation: MERGE
       value:
         typed_config:
-          "@type": "type.googleapis.com/envoy.extensions.filters.network.http_connection_manager.v3.HttpConnectionManager"
-          max_request_headers_kb: 1024
+          "@type": type.googleapis.com/envoy.extensions.filters.network.http_connection_manager.v3.HttpConnectionManager
+          common_http_protocol_options:
+            max_request_headers_kb: 1024
