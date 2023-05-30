@@ -24,6 +24,7 @@ spec:
           port:
             number: {{ .Values.service.targetport }}
         weight: 0
+      maxRequestHeadersKb: 1024
       {{- else if eq .Values.rollout.strategy "bluegreen" }} 
       route:
       - destination:
@@ -36,4 +37,5 @@ spec:
           port:
             number: {{ .Values.service.targetport }}
         weight: 0
+      maxRequestHeadersKb: 1024
       {{- end }}
