@@ -17,13 +17,14 @@
 
 1. `minikube start --cpus 4 --memory 8g`
 2. `sudo minikube tunnel --cleanup`
-3. open new terminal
-4. `git clone https://github.com/gilbertlim/helm-charts`
-5. `cd helm-charts/helm-charts`
-6. `helm install namespace init-charts/namespace -f init-charts/namespace/values.yaml --kube-context minikube`
-7. `helm install argocd addon-charts/argo-cd -f addon-charts/argo-cd/values.yaml --namespace argocd --kube-context minikube`
-8. argocd login (admin/`kubectl -n argocd get secret argocd-initial-admin-secret -o jsonpath="{.data.password}" | base64 -d`)
-9. create new app
+3. `minikube addons enable metrics-server`
+4. open new terminal
+5. `git clone https://github.com/gilbertlim/helm-charts`
+6. `cd helm-charts/helm-charts`
+7. `helm install namespace init-charts/namespace -f init-charts/namespace/values.yaml --kube-context minikube`
+8. `helm install argocd addon-charts/argo-cd -f addon-charts/argo-cd/values.yaml --namespace argocd --kube-context minikube`
+9. argocd login (admin/`kubectl -n argocd get secret argocd-initial-admin-secret -o jsonpath="{.data.password}" | base64 -d`)
+10. create new app
   - GENERAL > Application Name: app-of-apps
   - GENERAL > Project Name: default
   - SOURCE > Repository URL: https://github.com/gilbertlim/helm-charts.git
@@ -32,7 +33,12 @@
   - DESTINATION > Cluster URL: https://kubernetes.default.svc
   - DESTINATION > Namespace: argocd
   - Helm > VALUES FILES: values.yaml
-10. sync app-of-apps app
+11. sync app-of-apps app
+12. app dependency
+  1. istio-ingress, gateway > istiod > istio-base
+  2. grafana, kiali > prometheus
+  4. *-test-app > argo-rollouts, pinpoint
+
 
 <br>
 
@@ -55,6 +61,8 @@ LoadBalancer type의 Service 접속 설정
 |kiali|localhost|20001|http://localhost:20001|
 |grafana|localhost|50001|http://localhost:50001|
 
+metrics-server
+`minikube addons enable metrics-server`
 <br>
 
 ## 2. Namespace
