@@ -4,8 +4,9 @@ metadata:
   name: max-header
   namespace: msa
 spec:
-  workloadLabels:
-    app: pinpoint-test-app
+  workloadSelector:
+    labels:
+      app: pinpoint-test-app
   configPatches:
   - applyTo: HTTP_FILTER
     match:
