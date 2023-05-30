@@ -20,4 +20,4 @@ spec:
       value:
         typed_config:
           "@type": type.googleapis.com/envoy.extensions.filters.network.http_connection_manager.v3.HttpConnectionManager
-            max_request_headers_kb: 1024
+          max_request_headers_kb: 1024
