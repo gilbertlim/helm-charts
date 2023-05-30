@@ -13,6 +13,29 @@
 
 <br>
 
+## Quick Start
+
+1. `minikube start --cpus 4 --memory 8g`
+2. `sudo minikube tunnel --cleanup`
+3. open new terminal
+4. `git clone https://github.com/gilbertlim/helm-charts`
+5. `cd helm-charts/helm-charts`
+6. `helm install namespace init-charts/namespace -f init-charts/namespace/values.yaml --kube-context minikube`
+7. `helm install argocd addon-charts/argo-cd -f addon-charts/argo-cd/values.yaml --namespace argocd --kube-context minikube`
+8. argocd login (admin/`kubectl -n argocd get secret argocd-initial-admin-secret -o jsonpath="{.data.password}" | base64 -d`)
+9. create new app
+  - GENERAL > Application Name: app-of-apps
+  - GENERAL > Project Name: default
+  - SOURCE > Repository URL: https://github.com/gilbertlim/helm-charts.git
+  - SOURCE > Revision: main
+  - SOURCE > Path: helm-charts/addon-charts/app-of-apps
+  - DESTINATION > Cluster URL: https://kubernetes.default.svc
+  - DESTINATION > Namespace: argocd
+  - Helm > VALUES FILES: values.yaml
+10. sync app-of-apps app
+
+<br>
+
 ## 1. Minikube
 
 minikube 시작
@@ -94,6 +117,7 @@ ArgoCD 애플리케이션 생성을 위한 app chart
 - ArgoCD에서 app-of-apps 애플리케이션을 생성하고 배포하면 templates에 있는 대로 애플리케이션이 생성됨
 - 추후 sync를 눌러 각 애플리케이션을 배포
 
+> namespace: argocd
 
 charts
 - addon-charts/app-of-apps
