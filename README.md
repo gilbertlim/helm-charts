@@ -16,14 +16,14 @@
 ## Quick Start
 
 1. `minikube start --cpus 4 --memory 8g`
-2. `sudo minikube tunnel --cleanup`
-3. `minikube addons enable metrics-server`
+2. `minikube addons enable metrics-server`
+3. `sudo minikube tunnel --cleanup`
 4. open new terminal
 5. `git clone https://github.com/gilbertlim/helm-charts`
 6. `cd helm-charts/helm-charts`
 7. `helm install namespace init-charts/namespace -f init-charts/namespace/values.yaml --kube-context minikube`
 8. `helm install argocd addon-charts/argo-cd -f addon-charts/argo-cd/values.yaml --namespace argocd --kube-context minikube`
-9. argocd login (admin/`kubectl -n argocd get secret argocd-initial-admin-secret -o jsonpath="{.data.password}" | base64 -d`)
+9.  argocd login (admin / `kubectl -n argocd get secret argocd-initial-admin-secret -o jsonpath="{.data.password}" | base64 -d`)
 10. create new app
   - GENERAL > Application Name: app-of-apps
   - GENERAL > Project Name: default
@@ -35,9 +35,9 @@
   - Helm > VALUES FILES: values.yaml
 11. sync app-of-apps app
 12. app dependency
-  1. istio-ingress, gateway > istiod > istio-base
-  2. grafana, kiali > prometheus
-  4. *-test-app > argo-rollouts, pinpoint
+  - istio-ingress, gateway > istiod > istio-base
+  - grafana, kiali > prometheus
+  - *-test-app > argo-rollouts, pinpoint
 
 
 <br>
