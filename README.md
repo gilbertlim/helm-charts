@@ -161,6 +161,49 @@ charts
 
 <br>
 
+## msa-test-app
+
+### mysql (local)
+```sh
+docker run -d --name mysql -p 3306:3306 -e MYSQL_ROOT_PASSWORD=password mysql
+```
+1. `docker exec -it mysql /bin/bash`
+2. `mysql -u root -p`
+3. `create database member_service;` 
+4.
+```sql
+DROP DATABASE IF EXISTS member_service;
+CREATE DATABASE member_service;
+USE member_service;
+DROP TABLE IF EXISTS tbl_member CASCADE;
+CREATE TABLE tbl_member (
+    member_num INT UNSIGNED PRIMARY KEY AUTO_INCREMENT,
+    member_id VARCHAR(100) NOT NULL UNIQUE,
+    member_name VARCHAR(20)
+);
+```
+
+<br>
+
+### member
+- repository: `https://github.com/gilbertlim/member-service.git`
+
+Dockerfile
+```dockerfile
+FROM openjdk:17.0.1
+COPY build/libs/member-service-*-SNAPSHOT.jar app.jar
+
+ENTRYPOINT ["java", "-jar", "./app.jar"]
+```
+
+1. `./gradlew build -x test`
+2. `docker build -t member:0.0 --platform linux/amd64/v8 . --no-cache` (m1 only)
+3. `docker run -d --name member -e DB_CONNECTION_URL=jdbc:mysql://$(docker inspect mysql | jq -r '.[].NetworkSettings.Networks.bridge.IPAddress'):3306/member_service -e DB_USER=root -e DB_PASSWORD=password member:0.0`
+4. `docker tag member:0.0 9ilbert/member:0.0`
+5. `docker push 9ilbert/member:0.0`
+
+<br>
+
 # Addon charts
 
 <br>
