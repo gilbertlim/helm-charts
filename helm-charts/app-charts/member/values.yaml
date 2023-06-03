@@ -28,14 +28,14 @@ rollout:
 
 hostName: msa.member.com
 
-livenessProbe:
-  httpGet:
-    path: /members
-    port: 8080
-readinessProbe:
-  httpGet:
-    path: /members
-    port: 8080
+# livenessProbe:
+#   httpGet:
+#     path: /members
+#     port: 8080
+# readinessProbe:
+#   httpGet:
+#     path: /members
+#     port: 8080
 
 serviceAccount:
   annotations: {}
