@@ -3,7 +3,7 @@ replicaCount: 1
 image:
   repository: 9ilbert/member
   pullPolicy: Always
-  tag: 0.0
+  tag: "0.0"
 
 application:
   server:
