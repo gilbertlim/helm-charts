@@ -55,7 +55,7 @@ pinpoint-collector:
     # repository: pinpointdocker/pinpoint-collector
     # tag:
     repository: 9ilbert/pinpoint-collector
-    tag: 0.0
+    tag: "0.0"
     pullPolicy: IfNotPresent
   resources:
     requests:
