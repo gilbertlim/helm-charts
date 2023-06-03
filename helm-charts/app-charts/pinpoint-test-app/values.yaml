@@ -1,10 +1,8 @@
 replicaCount: 2
 
 image:
-  # repository: dstar55/docker-hello-world-spring-boot
   repository: pinpointdocker/pinpoint-quickstart
   pullPolicy: IfNotPresent
-  # tag: "latest"
   tag: 2.5.1
 
 application:
