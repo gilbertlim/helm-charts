@@ -49,10 +49,6 @@ spec:
                 -Dpinpoint.container
                 -Dpinpoint.applicationName={{ $serviceName }}
                 -Dprofiler.transport.grpc.collector.ip=pinpoint-pinpoint-collector.monitoring.svc.cluster.local
-                -Dprofiler.transport.grpc.agent.sender.headers.size.max=1K
-                -Dprofiler.transport.grpc.metadata.sender.headers.size.max=1K
-                -Dprofiler.transport.grpc.stat.sender.headers.size.max=1K
-                -Dprofiler.transport.grpc.span.sender.headers.size.max=1K
                 {{- end }}
           volumeMounts:
             - name: pinpoint-volume
