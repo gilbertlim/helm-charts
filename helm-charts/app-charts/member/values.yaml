@@ -1,9 +1,9 @@
 replicaCount: 1
 
 image:
-  repository: k1m743hyun/member-service
+  repository: 9ilbert/member
   pullPolicy: Always
-  tag: "latest"
+  tag: 0.0
 
 application:
   server:

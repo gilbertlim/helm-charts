@@ -29,6 +29,26 @@ spec:
             {{- toYaml .Values.livenessProbe | nindent 12 }}
           readinessProbe:
             {{- toYaml .Values.readinessProbe | nindent 12 }}
+          env:
+            - name: DB_CONNECTION_URL
+              valueFrom:
+                secretKeyRef:
+                  name: {{ $serviceName }}-secret
+                  key: url
+            - name: DB_USER
+              valueFrom:
+                secretKeyRef:
+                  name: {{ $serviceName }}-secret
+                  key: username
+            - name: DB_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: {{ $serviceName }}-secret
+                  key: password
+      # volumes:
+      #   - name: {{ $serviceName }}-volume
+      #     secret:
+      #       secretName: {{ $serviceName }}-secret
   strategy:
     {{- if eq .Values.rollout.strategy "bluegreen" }}
     blueGreen:
