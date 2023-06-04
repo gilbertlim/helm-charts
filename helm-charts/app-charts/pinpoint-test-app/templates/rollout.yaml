@@ -46,7 +46,6 @@ spec:
               value: >-
                 {{- if .Values.pinpoint.enabled }}
                 -javaagent:/pinpoint-volume/pinpoint-agent/pinpoint-bootstrap-{{ .Values.pinpoint.version }}.jar
-                -Dpinpoint.container
                 -Dpinpoint.agentId={POD_NAME}
                 -Dpinpoint.applicationName={{ $serviceName }}
                 -Dprofiler.transport.grpc.collector.ip=pinpoint-pinpoint-collector.monitoring.svc.cluster.local
