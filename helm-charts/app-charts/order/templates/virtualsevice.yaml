@@ -1,0 +1,39 @@
+{{- $serviceName := include "order.name" . -}}
+apiVersion: networking.istio.io/v1beta1
+kind: VirtualService
+metadata:
+  name: {{ $serviceName }}-vsvc
+spec:
+  hosts:
+  - {{ .Values.hostName }}
+  gateways:
+  - msa-gateway
+  http:
+    - name: primary
+      {{- if eq .Values.rollout.strategy "canary" }}
+      route:
+      - destination:
+          host: {{ $serviceName }}
+          subset: stable
+          port:
+            number: {{ .Values.service.targetport }}
+        weight: 100
+      - destination:
+          host: {{ $serviceName }}
+          subset: canary
+          port:
+            number: {{ .Values.service.targetport }}
+        weight: 0
+      {{- else if eq .Values.rollout.strategy "bluegreen" }} 
+      route:
+      - destination:
+          host: {{ $serviceName }}
+          port:
+            number: {{ .Values.service.targetport }}
+        weight: 100
+      - destination:
+          host: {{ $serviceName }}-preview
+          port:
+            number: {{ .Values.service.targetport }}
+        weight: 0
+      {{- end }}
