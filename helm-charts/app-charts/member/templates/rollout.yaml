@@ -17,6 +17,20 @@ spec:
       labels:
         {{- $labels | nindent 8 }}
     spec:
+      initContainers:
+        {{- if .Values.pinpoint.enabled }}
+        - name: pinpoint-agent-init
+          image: pinpointdocker/pinpoint-agent:{{ .Values.pinpoint.version }}
+          imagePullPolicy: IfNotPresent
+          command: ["/bin/sh", "-c"]
+          args: 
+            - >
+              cp -rf /pinpoint-agent /pinpoint-volume;
+              ls -R /pinpoint-volume;
+          volumeMounts:
+            - name: pinpoint-volume
+              mountPath: /pinpoint-volume
+        {{- end }}    
       containers:
         - name: {{ $serviceName }}
           image: "{{ .Values.image.repository }}:{{ .Values.image.tag | default .Chart.AppVersion }}"
@@ -45,10 +59,23 @@ spec:
                 secretKeyRef:
                   name: {{ $serviceName }}-secret
                   key: password
-      # volumes:
-      #   - name: {{ $serviceName }}-volume
-      #     secret:
-      #       secretName: {{ $serviceName }}-secret
+            - name: POD_NAME
+              valueFrom: {fieldRef: {fieldPath: metadata.name}}
+            - name: JAVA_TOOL_OPTIONS
+              value: >-
+                {{- if .Values.pinpoint.enabled }}
+                -javaagent:/pinpoint-volume/pinpoint-agent/pinpoint-bootstrap-{{ .Values.pinpoint.version }}.jar
+                -Dpinpoint.agentName=$(POD_NAME)
+                -Dpinpoint.applicationName={{ $serviceName }}
+                -Dpinpoint.container
+                -Dprofiler.transport.grpc.collector.ip=pinpoint-pinpoint-collector.monitoring.svc.cluster.local
+                {{- end }}                  
+          volumeMounts:
+            - name: pinpoint-volume
+              mountPath: /pinpoint-volume
+      volumes:
+        - name: pinpoint-volume
+          emptyDir: {}
   strategy:
     {{- if eq .Values.rollout.strategy "bluegreen" }}
     blueGreen:

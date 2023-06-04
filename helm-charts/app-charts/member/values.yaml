@@ -39,3 +39,7 @@ hostName: msa.member.com
 
 serviceAccount:
   annotations: {}
+
+pinpoint:
+  enabled: true
+  version: 2.5.1
