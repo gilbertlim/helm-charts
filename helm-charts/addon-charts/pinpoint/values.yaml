@@ -41,8 +41,8 @@ pinpoint-hbase:
     pullPolicy: IfNotPresent
   resources:
     requests:
-      memory: "1Gi"
-      cpu: "250m"
+      memory: "1Gi" # "4Gi"
+      cpu: "250m" # "1"
   zookeeper:
     host:
 
@@ -52,15 +52,13 @@ pinpoint-hbase:
 
 pinpoint-collector:
   image:
-    # repository: pinpointdocker/pinpoint-collector
-    # tag:
-    repository: 9ilbert/pinpoint-collector
-    tag: "0.0"
+    repository: 9ilbert/pinpoint-collector # pinpointdocker/pinpoint-collector
+    tag: "2.5.1"
     pullPolicy: IfNotPresent
   resources:
     requests:
       memory: "512Mi"
-      cpu: "200m"
+      cpu: "250m"
   receiver:
     grpc:
       agentPort: 9991

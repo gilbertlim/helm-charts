@@ -53,4 +53,4 @@ zookeeper:
 
 service:
   type: LoadBalancer
-  port: 40001  
+  port: 40001
