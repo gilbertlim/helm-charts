@@ -401,9 +401,9 @@ charts
 
 chart 생성 방법
 ```sh
-git clone https://github.com/headless-dev/pinpoint-kubernetes.git
-cp -r pinpoint-kubernetes/pinpoint . # 해당 폴더를 chart로 생성
-rm -rf pinpoint-kubernetes
+git clone https://github.com/gilbertlim/pinpoint-helm-charts.git
+cp -r pinpoint-helm-charts/pinpoint . # 해당 폴더를 chart로 생성
+rm -rf pinpoint-helm-charts
 ```
 
 pinpoint/charts/pinpoint-web/templates/service.yaml 수정
