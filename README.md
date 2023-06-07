@@ -189,7 +189,7 @@ CREATE TABLE tbl_member (
 
 ```sh
 # en0 interface 확인
-ifconfig en0 | egrep -o 'inet ([0-9\.]*)' | awk '{print $2}' # 192.168.0.27
+ifconfig en0 | egrep -o 'inet ([0-9\.]*)' | awk '{print $2}' # 172.16.23.223
 ```
 secret/mysql.yaml (필요 시 .gitignore 등록)
 ```yaml
