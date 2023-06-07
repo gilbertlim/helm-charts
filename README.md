@@ -194,7 +194,7 @@ ifconfig en0 | egrep -o 'inet ([0-9\.]*)' | awk '{print $2}' # 192.168.0.27
 secret/mysql.yaml (필요 시 .gitignore 등록)
 ```yaml
 #url: jdbc:mysql://<en0 interface ip>:<db port>/<db name>
-url: jdbc:mysql://192.168.0.27/member_service
+url: jdbc:mysql://172.16.23.223/member_service
 username: root
 password: password
 ```
