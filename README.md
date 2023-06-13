@@ -145,7 +145,7 @@ spec:
 # App charts
 <br>
 
-## test-app
+## istio-test-app
 
 > namespace: msa
 
