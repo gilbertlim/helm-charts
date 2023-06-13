@@ -37,6 +37,7 @@
 12. app dependency
   - istio-ingress, gateway > istiod > istio-base
   - grafana, kiali > prometheus
+  - pinpoint-web, pinpoint-collector > pinpoint-hbase
   - *-test-app > argo-rollouts, pinpoint
 
 
@@ -189,7 +190,7 @@ CREATE TABLE tbl_member (
 
 ```sh
 # en0 interface 확인
-ifconfig en0 | egrep -o 'inet ([0-9\.]*)' | awk '{print $2}' # 172.16.23.223
+ifconfig en0 | egrep -o 'inet ([0-9\.]*)' | awk '{print $2}'
 ```
 secret/mysql.yaml (필요 시 .gitignore 등록)
 ```yaml
