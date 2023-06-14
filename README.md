@@ -38,8 +38,10 @@ sudo minikube tunnel --cleanup
 
 - namespace
 - argocd
-  - id: admin
+  - id: `admin`
   - password: `kubectl -n argocd get secret argocd-initial-admin-secret -o jsonpath="{.data.password}" | base64 -d`
+
+<br>
 
 ```sh
 cd helm-charts/helm-charts
