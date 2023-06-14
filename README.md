@@ -299,7 +299,7 @@ ENTRYPOINT ["java", "-jar", "./app.jar"]
 <br>
 
 push image (multiplatform)
-```
+```sh
 ./gradlew build -x test
 
 docker run --privileged --rm tonistiigi/binfmt --install all
@@ -308,7 +308,7 @@ docker context ls # check context
 docker buildx create --name multiarch-builder default --use
 
 docker buildx build --platform linux/amd64,linux/arm64 -t 9ilbert/member:0.0 . --push
-`
+```
 
 <br>
 
@@ -316,6 +316,8 @@ container test
 ```sh
 docker run -d --name member -e DB_CONNECTION_URL=jdbc:mysql://$(docker inspect mysql | jq -r '.[].NetworkSettings.Networks.bridge.IPAddress'):3306/member_service -e DB_USER=root -e DB_PASSWORD=password member:0.0
 ```
+
+<br>
 
 ### Secrets
 
