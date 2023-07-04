@@ -47,3 +47,4 @@ pinpoint:
 
 grpc:
   enabled: false
+  port: 9090
