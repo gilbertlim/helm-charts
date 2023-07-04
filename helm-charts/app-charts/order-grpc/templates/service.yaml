@@ -1,0 +1,36 @@
+{{- $serviceName := include "order-grpc.name" . -}}
+{{- $serviceLabels := include "order-grpc.serviceLabels" . -}}
+{{- $selectorLabels := include "order-grpc.selectorLabels" . -}}
+apiVersion: v1
+kind: Service
+metadata:
+  name: {{ $serviceName }}
+  labels:
+    {{- $serviceLabels | nindent 4 }}
+spec:
+  type: {{ .Values.service.type }}
+  ports:
+    - port: {{ .Values.service.port }}
+      targetPort: {{ .Values.service.targetport }}
+      protocol: TCP
+      name: http
+  selector:
+    {{ $selectorLabels | nindent 4 }}
+---
+{{- if eq .Values.rollout.strategy "bluegreen" }}
+apiVersion: v1
+kind: Service
+metadata:
+  name: {{ $serviceName }}-preview
+  labels:
+    {{- $serviceLabels | nindent 4 }}    
+spec:
+  type: {{ .Values.service.type }}
+  ports:
+    - port: {{ .Values.service.port }}
+      targetPort: {{ .Values.service.targetport }}
+      protocol: TCP
+      name: http
+  selector:
+    {{- $selectorLabels | nindent 4 }}
+{{- end }}
