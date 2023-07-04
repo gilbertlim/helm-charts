@@ -6,6 +6,7 @@ image:
   tag: "vanila-0.1"
 
 application:
+  profile: dev
   server:
     port: 8080
 

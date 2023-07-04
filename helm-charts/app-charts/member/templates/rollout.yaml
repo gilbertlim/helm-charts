@@ -61,6 +61,8 @@ spec:
                   key: password
             - name: POD_NAME
               valueFrom: {fieldRef: {fieldPath: metadata.name}}
+            - name: SPRING_PROFILES_ACTIVE
+              value: {{ .Values.application.profile }}
             - name: JAVA_TOOL_OPTIONS
               value: >-
                 {{- if .Values.pinpoint.enabled }}
