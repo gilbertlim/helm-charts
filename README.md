@@ -222,7 +222,7 @@ spec:
 <br>
 
 charts
-- app-charts/test-app
+- app-charts/istio-test-app
 
 <br>
 
@@ -237,92 +237,13 @@ charts
 
 <br>
 
-## mysql (local)
+## msa example
 
-minikube cluster 내부 pod에서 로컬의 mysql container에 접근하는 방식 적용
+### postgres (local)
+- repository: `https://github.com/gilbertlim/database.git`
 
-<br>
-
-mysql container
-```sh
-docker run -d --name mysql -p 3306:3306 -e MYSQL_ROOT_PASSWORD=password mysql
-```
-
-<br>
-
-sql
-1. `docker exec -it mysql /bin/bash`
-2. `mysql -u root -p`
-3. `create database member_service;` 
-4. run sql
-  ```sql
-  DROP DATABASE IF EXISTS member_service;
-  CREATE DATABASE member_service;
-  USE member_service;
-  DROP TABLE IF EXISTS tbl_member CASCADE;
-  CREATE TABLE tbl_member (
-      member_num INT UNSIGNED PRIMARY KEY AUTO_INCREMENT,
-      member_id VARCHAR(100) NOT NULL UNIQUE,
-      member_name VARCHAR(20)
-  );
-  
-  DROP DATABASE IF EXISTS order_service;
-  CREATE DATABASE order_service;
-  USE order_service;
-  
-  DROP TABLE IF EXISTS tbl_order CASCADE;
-  CREATE TABLE tbl_order (
-      order_num BIGINT UNSIGNED PRIMARY KEY AUTO_INCREMENT,
-      member_num INT UNSIGNED
-  );
-  
-  DROP TABLE IF EXISTS tbl_order_item CASCADE;
-  CREATE TABLE tbl_order_item (
-      order_item_num BIGINT UNSIGNED PRIMARY KEY AUTO_INCREMENT,
-      order_num BIGINT UNSIGNED,
-      item_num BIGINT UNSIGNED,
-      item_count SMALLINT UNSIGNED
-  );
-  ```
-
-<br>
-
-## member
-
-<br>
-
-- repository: `https://github.com/gilbertlim/member-service.git`
-
-<br>
-
-Dockerfile
-```dockerfile
-FROM --platform=$BUILDPLATFORM openjdk:17.0.1
-COPY build/libs/member-service-*-SNAPSHOT.jar app.jar
-
-ENTRYPOINT ["java", "-jar", "./app.jar"]
-```
-
-<br>
-
-push image (multiplatform)
-```sh
-./gradlew build -x test
-
-docker run --privileged --rm tonistiigi/binfmt --install all
-docker context ls # check context
-# docker buildx create --name multiarch-builder <context> --use
-docker buildx create --name multiarch-builder default --use
-
-docker buildx build --platform linux/amd64,linux/arm64 -t 9ilbert/member:0.0 . --push
-```
-
-<br>
-
-container test
-```sh
-docker run -d --name member -e DB_CONNECTION_URL=jdbc:mysql://$(docker inspect mysql | jq -r '.[].NetworkSettings.Networks.bridge.IPAddress'):3306/member_service -e DB_USER=root -e DB_PASSWORD=password member:0.0
-```
+1. `cd postgres`
+2. `docker compose up -d`
 
 <br>
 
@@ -332,7 +253,7 @@ db에 접근할 msa app 배포 시 db 접속 정보를 secret으로 등록해주
 
 <br>
 
-db 접속 정보 등록
+db 접속 정보 확인
 ```sh
 # local의 en0 interface 확인
 ifconfig en0 | egrep -o 'inet ([0-9\.]*)' | awk '{print $2}'
@@ -340,15 +261,33 @@ ifconfig en0 | egrep -o 'inet ([0-9\.]*)' | awk '{print $2}'
 
 <br>
 
-app-charts/member/secret/mysql.yaml (필요 시 .gitignore 등록)
+db 접속 정보 등록
+
+secret/postgres.yaml (필요 시 .gitignore 등록)
 ```yaml
 #url: jdbc:mysql://<en0 interface ip>:<db port>/<db name>
 url: jdbc:mysql://172.16.23.223/member_service
-username: root
-password: password
+username: postgres
+password: postgres
 ```
 
-<br><br><br><br><br>
+<br>
+
+### msa apps
+
+|application|github|chart|description|
+|---|---|---|---|
+|member|`https://github.com/gilbertlim/member-service.git`|app-charts/member|회원 서비스|
+|member|`https://github.com/gilbertlim/order-service.git`|app-charts/order|주문 서비스|
+|member|`https://github.com/gilbertlim/product-service.git`|app-charts/product|상품 서비스|
+
+
+image build and push
+- `docker login`
+- edit build.sh
+- `bash build.sh`
+
+<br>
 
 # Addon charts
 
