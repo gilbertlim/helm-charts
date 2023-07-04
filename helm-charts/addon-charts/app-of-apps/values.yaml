@@ -1,4 +1,5 @@
 valueFiles: values.yaml
+msaValueFiles: dev-values.yaml
 
 spec:
   destination:

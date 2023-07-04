@@ -15,4 +15,4 @@ spec:
     targetRevision: {{ .Values.spec.source.targetRevision }}
     helm:
       valueFiles: 
-        - {{ .Values.valueFiles }}
+        - {{ .Values.msaValueFiles }}
