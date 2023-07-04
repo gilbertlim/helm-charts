@@ -71,10 +71,6 @@ spec:
                 -Dpinpoint.applicationName={{ $serviceName }}
                 -Dpinpoint.container
                 -Dprofiler.transport.grpc.collector.ip=pinpoint-pinpoint-collector.monitoring.svc.cluster.local
-                {{- if .Values.grpc.enabled }}
-                -Dservice.product.base-url=http://{{ $serviceName }}:8080
-                -Dgrpc.client.product.address=static://{{ $serviceName }}:9090
-                {{- end }}
                 {{- end }}                  
           volumeMounts:
             - name: pinpoint-volume

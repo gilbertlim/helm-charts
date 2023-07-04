@@ -275,11 +275,13 @@ password: postgres
 
 ### msa apps
 
-|application|github|chart|description|
+|application|source|chart|description|
 |---|---|---|---|
 |member|`https://github.com/gilbertlim/member-service.git`|app-charts/member|회원 서비스|
-|member|`https://github.com/gilbertlim/order-service.git`|app-charts/order|주문 서비스|
-|member|`https://github.com/gilbertlim/product-service.git`|app-charts/product|상품 서비스|
+|order|`https://github.com/gilbertlim/order-service.git`|app-charts/order|주문 서비스 (feign)|
+|product|`https://github.com/gilbertlim/product-service.git`|app-charts/product|상품 서비스 (feign)|
+|order-grpc|order 이미지와 동일|app-charts/order-grpc|주문 서비스 (grpc)|
+|product-grpc|product 이미지와 동일|app-charts/product-grpc|상품 서비스 (grpc)|
 
 
 image build and push
