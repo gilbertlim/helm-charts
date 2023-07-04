@@ -18,7 +18,7 @@ spec:
     - port: {{ .Values.grpc.port }}
       targetPort: {{ .Values.grpc.port }}
       protocol: TCP
-      name: http
+      name: grpc
     {{- end }}
   selector:
     {{ $selectorLabels | nindent 4 }}
@@ -41,7 +41,7 @@ spec:
     - port: {{ .Values.grpc.port }}
       targetPort: {{ .Values.grpc.port }}
       protocol: TCP
-      name: http
+      name: grpc
     {{- end }}
   selector:
     {{- $selectorLabels | nindent 4 }}
