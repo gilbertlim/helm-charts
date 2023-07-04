@@ -1,0 +1,46 @@
+replicaCount: 1
+
+image:
+  repository: 9ilbert/product
+  pullPolicy: Always
+  tag: "vanila-0.1"
+
+application:
+  profile: ''
+  server:
+    port: 8080
+
+service:
+  type: ClusterIP
+  port: 8080
+  targetport: 8080
+
+resources:
+  limits:
+    cpu: 500m
+    memory: 512Mi
+  requests:
+    cpu: 500m
+    memory: 512Mi
+
+rollout:
+  strategy: bluegreen
+  autoPromotionEnabled: true
+
+hostName: msa.product.com
+
+# livenessProbe:
+#   httpGet:
+#     path: /members
+#     port: 8080
+# readinessProbe:
+#   httpGet:
+#     path: /members
+#     port: 8080
+
+serviceAccount:
+  annotations: {}
+
+pinpoint:
+  enabled: true
+  version: 2.5.1
