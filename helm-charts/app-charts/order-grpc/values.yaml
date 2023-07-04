@@ -47,4 +47,5 @@ pinpoint:
 
 grpc:
   enabled: false
+  targetSevice: product-grpc
   port: 9090
