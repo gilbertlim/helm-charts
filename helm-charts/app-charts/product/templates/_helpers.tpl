@@ -1,7 +1,7 @@
 {{/*
 Expand the name of the chart.
 */}}
-{{- define "order.name" -}}
+{{- define "product.name" -}}
 {{- default .Chart.Name .Values.nameOverride | trunc 63 | trimSuffix "-" }}
 {{- end }}
 
@@ -10,7 +10,7 @@ Create a default fully qualified app name.
 We truncate at 63 chars because some Kubernetes name fields are limited to this (by the DNS naming spec).
 If release name contains chart name it will be used as a full name.
 */}}
-{{- define "order.fullname" -}}
+{{- define "product.fullname" -}}
 {{- if .Values.fullnameOverride }}
 {{- .Values.fullnameOverride | trunc 63 | trimSuffix "-" }}
 {{- else }}
@@ -26,40 +26,40 @@ If release name contains chart name it will be used as a full name.
 {{/*
 Create chart name and version as used by the chart label.
 */}}
-{{- define "order.chart" -}}
+{{- define "product.chart" -}}
 {{- printf "%s-%s" .Chart.Name .Chart.Version | replace "+" "_" | trunc 63 | trimSuffix "-" }}
 {{- end }}
 
 {{/*
 Common labels
 */}}
-{{- define "order.labels" -}}
-{{ include "order.selectorLabels" . }}
+{{- define "product.labels" -}}
+{{ include "product.selectorLabels" . }}
 version: stable
 {{- end }}
 
 {{/*
 Service labels
 */}}
-{{- define "order.serviceLabels" -}}
-service: {{ include "order.name" . }}
+{{- define "product.serviceLabels" -}}
+service: {{ include "product.name" . }}
 app.kubernetes.io/instance: {{ .Release.Name }}
-app: {{ include "order.name" . }}
+app: {{ include "product.name" . }}
 {{- end }}
 
 {{/*
 Selector labels
 */}}
-{{- define "order.selectorLabels" -}}
-app: {{ include "order.name" . }}
+{{- define "product.selectorLabels" -}}
+app: {{ include "product.name" . }}
 {{- end }}
 
 {{/*
 Create the name of the service account to use
 */}}
-{{- define "order.serviceAccountName" -}}
+{{- define "product.serviceAccountName" -}}
 {{- if .Values.serviceAccount.create }}
-{{- default (include "order.fullname" .) .Values.serviceAccount.name }}
+{{- default (include "product.fullname" .) .Values.serviceAccount.name }}
 {{- else }}
 {{- default "default" .Values.serviceAccount.name }}
 {{- end }}
