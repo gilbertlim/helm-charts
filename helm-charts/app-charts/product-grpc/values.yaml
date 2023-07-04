@@ -27,7 +27,7 @@ rollout:
   strategy: bluegreen
   autoPromotionEnabled: true
 
-hostName: msa.product.com
+hostName: msa.product-grpc.com
 
 # livenessProbe:
 #   httpGet:
