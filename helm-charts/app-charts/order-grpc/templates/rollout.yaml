@@ -74,8 +74,8 @@ spec:
                 -Dprofiler.transport.grpc.collector.ip=pinpoint-pinpoint-collector.monitoring.svc.cluster.local
                 {{- if .Values.grpc.enabled }}
                 -Dinner-communication.method=grpc
-                -Dservice.product.base-url=http://{{ .Values.grpc.targetSevice }}:8080
-                -Dgrpc.client.product.address=static://{{ .Values.grpc.targetSevice }}:9090
+                -Dservice.product.base-url=http://{{ .Values.grpc.targetSevice }}:{{ .Values.service.port }}
+                -Dgrpc.client.product.address=static://{{ .Values.grpc.targetSevice }}:{{ .Values.grpc.port }}
                 -Dprofiler.grpc.client.enable=true
                 -Dprofiler.grpc.server.enable=true
                 {{- end }}
