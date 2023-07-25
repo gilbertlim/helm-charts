@@ -17,10 +17,7 @@ service:
 
 resources:
   limits:
-    cpu: 700m
-    memory: 512Mi
-  requests:
-    cpu: 500m
+    cpu: 1000m
     memory: 512Mi
 
 rollout:
