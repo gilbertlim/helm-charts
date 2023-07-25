@@ -3,7 +3,7 @@ replicaCount: 1
 image:
   repository: 9ilbert/product
   pullPolicy: Always
-  tag: "vanila-0.1"
+  tag: "amd-0.1"
 
 application:
   profile: ''
