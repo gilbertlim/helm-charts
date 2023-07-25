@@ -72,8 +72,10 @@ spec:
                 -Dpinpoint.applicationName={{ $serviceName }}
                 -Dpinpoint.container
                 -Dprofiler.transport.grpc.collector.ip=pinpoint-pinpoint-collector.monitoring.svc.cluster.local
+                {{- if .Values.grpc.enabled }}
                 -Dprofiler.grpc.client.enable=true
                 -Dprofiler.grpc.server.enable=true
+                {{- end }}
                 {{- end }}                  
           volumeMounts:
             - name: pinpoint-volume

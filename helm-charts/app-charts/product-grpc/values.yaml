@@ -43,5 +43,5 @@ pinpoint:
   version: 2.5.1
 
 grpc:
-  enabled: false
+  enabled: true
   port: 9090
