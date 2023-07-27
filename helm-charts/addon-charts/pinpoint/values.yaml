@@ -5,8 +5,7 @@
 # See this repo for image build details: https://github.com/Comcast/kube-yarn/tree/master/image
 
 global:
-  # batchEnabled: false
-  batchEnabled: true # activate flink
+  batchEnabled: false
   webhookEnabled: false
 
 pinpoint-zookeeper:
