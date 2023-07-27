@@ -1,0 +1,220 @@
+{
+	"info": {
+		"_postman_id": "53f536bc-73c9-4a78-a160-da68853a0d34",
+		"name": "product service",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "17265123"
+	},
+	"item": [
+		{
+			"name": "[DEV] Create One",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Host",
+						"value": "msa.product.com",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"productName\": \"apple\",\n    \"price\": 2000,\n    \"quantity\": 10\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost/products",
+					"host": [
+						"localhost"
+					],
+					"path": [
+						"products"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "[LOCAL] Create One",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Host",
+						"value": "msa.product.com",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"productName\": \"apple\",\n    \"price\": 1000,\n    \"quantity\": 10\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:8082/products",
+					"host": [
+						"localhost"
+					],
+					"port": "8082",
+					"path": [
+						"products"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "[DEV] Get All",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Host",
+						"value": "msa.product.com",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "localhost/products",
+					"host": [
+						"localhost"
+					],
+					"path": [
+						"products"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "[LOCAL] Get All",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Host",
+						"value": "msa.product.com",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "localhost:8082/products",
+					"host": [
+						"localhost"
+					],
+					"port": "8082",
+					"path": [
+						"products"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "[DEV] Get One",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Host",
+						"value": "msa.product.com",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "localhost/products/1",
+					"host": [
+						"localhost"
+					],
+					"path": [
+						"products",
+						"1"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "[LOCAL] Get One",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Host",
+						"value": "msa.product.com",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "localhost:8082/products/1",
+					"host": [
+						"localhost"
+					],
+					"port": "8082",
+					"path": [
+						"products",
+						"1"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "[DEV] Delete One",
+			"request": {
+				"method": "DELETE",
+				"header": [
+					{
+						"key": "Host",
+						"value": "msa.product.com",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "localhost/products/1",
+					"host": [
+						"localhost"
+					],
+					"path": [
+						"products",
+						"1"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "[LOCAL] Delete One",
+			"request": {
+				"method": "DELETE",
+				"header": [
+					{
+						"key": "Host",
+						"value": "msa.product.com",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "localhost:8082/products/1",
+					"host": [
+						"localhost"
+					],
+					"port": "8082",
+					"path": [
+						"products",
+						"1"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}

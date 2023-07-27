@@ -1,0 +1,220 @@
+{
+	"info": {
+		"_postman_id": "2db83e30-40aa-42ed-b1b2-1221069c8484",
+		"name": "order service",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "17265123"
+	},
+	"item": [
+		{
+			"name": "[DEV] Create Order",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Host",
+						"value": "msa.order.com",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"memberId\": \"gilbert\",\n    \"productDtos\": [\n        {\n            \"productId\": 1,\n            \"quantity\": 2\n        },\n        {\n            \"productId\": 2,\n            \"quantity\": 2\n        }\n    ]\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost/orders",
+					"host": [
+						"localhost"
+					],
+					"path": [
+						"orders"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "[LOCAL] Create Order",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Host",
+						"value": "msa.order.com",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"memberId\": \"gilbert\",\n    \"productDtos\": [\n        {\n            \"productId\": 1,\n            \"quantity\": 2\n        },\n        {\n            \"productId\": 2,\n            \"quantity\": 2\n        }\n    ]\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:8081/orders",
+					"host": [
+						"localhost"
+					],
+					"port": "8081",
+					"path": [
+						"orders"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "[DEV] Get All",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Host",
+						"value": "msa.order.com",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "localhost/orders",
+					"host": [
+						"localhost"
+					],
+					"path": [
+						"orders"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "[LOCAL] Get All",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Host",
+						"value": "msa.order.com",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "localhost:8081/orders",
+					"host": [
+						"localhost"
+					],
+					"port": "8081",
+					"path": [
+						"orders"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "[DEV] Get One",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Host",
+						"value": "msa.order.com",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "localhost/orders/2",
+					"host": [
+						"localhost"
+					],
+					"path": [
+						"orders",
+						"2"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "[LOCAL] Get One",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Host",
+						"value": "msa.order.com",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "localhost:8081/orders/1",
+					"host": [
+						"localhost"
+					],
+					"port": "8081",
+					"path": [
+						"orders",
+						"1"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "[DEV] Delete One",
+			"request": {
+				"method": "DELETE",
+				"header": [
+					{
+						"key": "Host",
+						"value": "msa.order.com",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "localhost/orders/2",
+					"host": [
+						"localhost"
+					],
+					"path": [
+						"orders",
+						"2"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "[LOCAL] Delete One",
+			"request": {
+				"method": "DELETE",
+				"header": [
+					{
+						"key": "Host",
+						"value": "msa.order.com",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "localhost:8081/orders/1",
+					"host": [
+						"localhost"
+					],
+					"port": "8081",
+					"path": [
+						"orders",
+						"1"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}

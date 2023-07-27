@@ -1,0 +1,234 @@
+{
+	"info": {
+		"_postman_id": "2ef99dff-aac4-4ae0-969e-62fc8138866f",
+		"name": "member service",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "17265123"
+	},
+	"item": [
+		{
+			"name": "[DEV] Create Member",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Host",
+						"value": "msa.member.com",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"memberId\": \"newbie\",\n    \"name\": \"newbie\",\n    \"email\": \"newbie@gmail.com\",\n    \"phone\": \"010-1234-5678\",\n    \"address\": \"서울특별시 강남구\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost/members",
+					"host": [
+						"localhost"
+					],
+					"path": [
+						"members"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "[LOCAL] Create Member",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Host",
+						"value": "msa.member.com",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"memberId\": \"newbie6\",\n    \"name\": \"newbie\",\n    \"email\": \"newbie@gmail.com\",\n    \"phone\": \"010-1234-5678\",\n    \"address\": \"서울특별시 강남구\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:8080/members",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"members"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "[DEV] Get All",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Host",
+						"value": "msa.member.com",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "localhost/members",
+					"host": [
+						"localhost"
+					],
+					"path": [
+						"members"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "[LOCAL] Get All",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Host",
+						"value": "msa.member.com",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "localhost:8080/members",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"members"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "[DEV] Get One",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Host",
+						"value": "msa.member.com",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "localhost/members/gilbert",
+					"host": [
+						"localhost"
+					],
+					"path": [
+						"members",
+						"gilbert"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "[LOCAL] Get One",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Host",
+						"value": "msa.member.com",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "localhost:8080/members/gilbert",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"members",
+						"gilbert"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "[DEV] Delete One",
+			"request": {
+				"method": "DELETE",
+				"header": [
+					{
+						"key": "Host",
+						"value": "msa.member.com",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "localhost/members/newbie",
+					"host": [
+						"localhost"
+					],
+					"path": [
+						"members",
+						"newbie"
+					],
+					"query": [
+						{
+							"key": "",
+							"value": "",
+							"disabled": true
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "[LOCAL] Delete One",
+			"request": {
+				"method": "DELETE",
+				"header": [
+					{
+						"key": "Host",
+						"value": "msa.member.com",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "localhost:8080/members/newbie",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"members",
+						"newbie"
+					],
+					"query": [
+						{
+							"key": "",
+							"value": "",
+							"disabled": true
+						}
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}

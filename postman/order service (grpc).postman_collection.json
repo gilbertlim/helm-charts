@@ -1,0 +1,42 @@
+{
+	"info": {
+		"_postman_id": "babbb3a4-d35d-4bf5-bedb-ecbbbc1c2140",
+		"name": "order service (grpc)",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "17265123"
+	},
+	"item": [
+		{
+			"name": "[DEV] Create Order",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Host",
+						"value": "msa.order-grpc.com",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"memberId\": \"gilbert\",\n    \"productDtos\": [\n        {\n            \"productId\": 1,\n            \"quantity\": 2\n        },\n        {\n            \"productId\": 2,\n            \"quantity\": 2\n        }\n    ]\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost/orders",
+					"host": [
+						"localhost"
+					],
+					"path": [
+						"orders"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
