@@ -27,8 +27,6 @@ rollout:
   strategy: bluegreen
   autoPromotionEnabled: true
 
-hostName: msa.member-go.com
-
 # livenessProbe:
 #   httpGet:
 #     path: /members
