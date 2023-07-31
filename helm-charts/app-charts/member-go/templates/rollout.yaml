@@ -44,11 +44,11 @@ spec:
           readinessProbe:
             {{- toYaml .Values.readinessProbe | nindent 12 }}
           env:
-            - name: DB_CONNECTION_URL
+            - name: DB_HOST
               valueFrom:
                 secretKeyRef:
                   name: {{ $serviceName }}-secret
-                  key: url
+                  key: host
             - name: DB_USER
               valueFrom:
                 secretKeyRef:
@@ -59,6 +59,11 @@ spec:
                 secretKeyRef:
                   name: {{ $serviceName }}-secret
                   key: password
+            - name: DB_NAME
+              valueFrom:
+                secretKeyRef:
+                  name: {{ $serviceName }}-secret
+                  key: dbname
             - name: POD_NAME
               valueFrom: {fieldRef: {fieldPath: metadata.name}}
             - name: SPRING_PROFILES_ACTIVE
