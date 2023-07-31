@@ -1,6 +1,6 @@
-{{- $serviceName := include "member.name" . -}}
-{{- $serviceLabels := include "member.serviceLabels" . -}}
-{{- $selectorLabels := include "member.selectorLabels" . -}}
+{{- $serviceName := include "member-go.name" . -}}
+{{- $serviceLabels := include "member-go.serviceLabels" . -}}
+{{- $selectorLabels := include "member-go.selectorLabels" . -}}
 apiVersion: v1
 kind: Service
 metadata:

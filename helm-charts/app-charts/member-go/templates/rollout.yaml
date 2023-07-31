@@ -1,6 +1,6 @@
-{{- $serviceName := include "member.name" . -}}
-{{- $labels := include "member.labels" . -}}
-{{- $selectorLabels := include "member.selectorLabels" . -}}
+{{- $serviceName := include "member-go.name" . -}}
+{{- $labels := include "member-go.labels" . -}}
+{{- $selectorLabels := include "member-go.selectorLabels" . -}}
 apiVersion: argoproj.io/v1alpha1
 kind: Rollout
 metadata:

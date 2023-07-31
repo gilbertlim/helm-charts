@@ -1,4 +1,4 @@
-{{- $serviceName := include "member.name" . -}}
+{{- $serviceName := include "membe-go.name" . -}}
 apiVersion: networking.istio.io/v1beta1
 kind: DestinationRule
 metadata:
